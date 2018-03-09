@@ -72,6 +72,15 @@ public abstract class SQLDatabase {
         }
     }
 
+    ResultSet executeQuery(String query) {
+        try {
+            return executeDBQuery(query);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     ResultSet executeDBQuery(String query) throws SQLException {
         refreshConnection();
         Statement statement = connection.createStatement();
