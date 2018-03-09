@@ -1,8 +1,5 @@
 pipeline {
   agent any
-  triggers {
-       pollSCM('H/15 * * * *')
-  }
   stages {
     stage('Initialize') {
       steps {
@@ -21,10 +18,8 @@ pipeline {
         sh 'mvn test'
       }
     }
-    stage('Report') {
-      steps {
-        junit 'target/surefire-reports/**/*.xml'
-      }
-    }
+  }
+  triggers {
+    pollSCM('H/15 * * * *')
   }
 }
