@@ -19,7 +19,7 @@ public abstract class DAOSQLImpl<T> implements DAO<T> {
 
     @Override
     public List<T> findAll() {
-        ResultSet resultSet = database.executeQuery("SELECT * FROM " + tableName);
+        ResultSet resultSet = database.selectAll(tableName);
         List<T> list = new ArrayList<>();
 
         if (resultSet != null) {
@@ -39,8 +39,7 @@ public abstract class DAOSQLImpl<T> implements DAO<T> {
         if (identifier == null || identifier.equals("null")) {
             return null;
         }
-
-        ResultSet resultSet = database.executeQuery("SELECT * FROM " + tableName + " WHERE " + idColumn + " = \'" + identifier + "\'");
+        ResultSet resultSet = database.selectAllByID(tableName, idColumn, identifier);
 
         if (resultSet != null) {
             try {
@@ -53,9 +52,16 @@ public abstract class DAOSQLImpl<T> implements DAO<T> {
         return null;
     }
 
+    //TODO testing: Not sure if this works if the id isn't a string
     @Override
     public boolean delete(String identifier) {
-        return database.delete(tableName, idColumn, identifier);
+        return database.deleteFrom(tableName, idColumn, statement -> {
+            try {
+                statement.setString(1, identifier);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        });
     }
 
     abstract T getObjectFromResultSet(ResultSet resultSet);

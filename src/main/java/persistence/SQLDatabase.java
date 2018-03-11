@@ -1,12 +1,6 @@
 package persistence;
 
-import utils.Pair;
-
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.List;
+import java.sql.*;
 
 public abstract class SQLDatabase {
 
@@ -32,99 +26,97 @@ public abstract class SQLDatabase {
         connection = getConnection(address, port, databaseName, username, password);
     }
 
-    private void closeConnection() {
-        if (connection != null) {
-            try {
-                connection.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+    public boolean insertInto(String tableName, int amountOfValues, FillStatementStrategy fillStrategy) {
+        if (amountOfValues <= 0) {
+            return false;
         }
-    }
+        StringBuilder questionMarks = new StringBuilder("");
+        for (int i = 0; i < amountOfValues - 1; i++) {
+            questionMarks.append("?, ");
+        }
+        questionMarks.append("?");
 
-    public boolean insertInto(String tableName, String... values) {
+        refreshConnection();
         try {
-            executeDBQuery("INSERT INTO " + tableName + " VALUES(" + formatToQuery(values) + ")");
+            PreparedStatement statement = connection.prepareStatement("INSERT INTO " + tableName + " VALUES(" + questionMarks.toString() + ")");
+            fillStrategy.fillStatement(statement);
+            statement.executeUpdate();
+            endStatement(statement);
             return true;
         } catch (SQLException e) {
             e.printStackTrace();
-            return false;
         }
+        return false;
     }
 
-    public boolean update(String tableName, List<Pair<String, String>> values, String idColumn, String id) {
+    public boolean deleteFrom(String tableName, String idColumn, FillStatementStrategy fillStrategy) {
+        refreshConnection();
         try {
-            executeDBQuery("UPDATE " + tableName + " SET " + formatUpdateValues(values) + " WHERE " + idColumn + " = " + id);
+            PreparedStatement statement = connection.prepareStatement("DELETE FROM " + tableName + " WHERE " + idColumn + " = ?");
+            fillStrategy.fillStatement(statement);
+            statement.executeUpdate();
+            endStatement(statement);
             return true;
         } catch (SQLException e) {
             e.printStackTrace();
-            return false;
         }
+        return false;
     }
 
-    public boolean delete(String tableName,  String idColumn, String id) {
-        try {
-            executeDBQuery("DELETE FROM " + tableName + " WHERE " + idColumn + " = " + id);
-            return true;
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
-        }
+    public ResultSet selectAll(String tableName) {
+        return executeDBQuery("SELECT * FROM " + tableName);
     }
 
-    ResultSet executeQuery(String query) {
+    //TODO testing: Not sure if this works if the id isn't a string
+    public ResultSet selectAllByID(String tableName, String idColumn, String id) {
+        refreshConnection();
         try {
-            return executeDBQuery(query);
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM " + tableName + " WHERE " + idColumn + " = ?");
+            statement.setString(1, id);
+            ResultSet set = statement.executeQuery();
+            endStatement(statement);
+            return set;
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return null;
     }
 
-    ResultSet executeDBQuery(String query) throws SQLException {
+    private ResultSet executeDBQuery(String query) {
         refreshConnection();
-        Statement statement = connection.createStatement();
-        ResultSet set = statement.executeQuery(query);
-        statement.close();
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet set = statement.executeQuery(query);
+            endStatement(statement);
+            return set;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    private void closeConnection() {
+        try {
+            if (connection != null && !connection.isClosed()) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void endStatement(Statement statement) {
+        try {
+            statement.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         closeConnection();
-        return set;
-    }
-
-    private String formatToQuery(String[] values) {
-        StringBuilder builder = new StringBuilder();
-        for (int i = 0; i < values.length - 1; i++) {
-            appendBuilderValue(builder, values[i]);
-            builder.append(", ");
-        }
-        appendBuilderValue(builder, values[values.length - 1]);
-        return builder.toString();
-    }
-
-    private void appendBuilderValue(StringBuilder builder, String value) {
-        if (value == null || value.equalsIgnoreCase("null")) {
-            builder.append(value);
-        } else {
-            builder.append("'").append(value).append("'");
-        }
-    }
-
-    private String formatUpdateValues(List<Pair<String, String>> values) {
-        StringBuilder builder = new StringBuilder();
-        for (int i = 0; i < values.size() - 1; i++) {
-            appendBuilderUpdateValue(builder, values.get(i));
-            builder.append(", ");
-        }
-        appendBuilderUpdateValue(builder, values.get(values.size() - 1));
-        return builder.toString();
-    }
-
-    private void appendBuilderUpdateValue(StringBuilder builder, Pair<String, String> valuePair) {
-        String value = valuePair.getRight();
-        if (value == null || value.equalsIgnoreCase("null")) {
-            builder.append(valuePair.getLeft()).append(" = ").append(value);
-        } else {
-            builder.append(valuePair.getLeft()).append(" = '").append(valuePair.getRight()).append("'");
-        }
     }
 
 }
