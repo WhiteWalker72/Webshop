@@ -17,14 +17,4 @@ public class PassHashingStrategyImpl implements IPassHashingStrategy {
         return BCrypt.hashpw(password, salt).equals(hashedPass);
     }
 
-    public static void main(String[] args) {
-        String password = "test";
-        IPassHashingStrategy passHasher = new PassHashingStrategyImpl();
-        Pair<String, String> hashPair = passHasher.hashPassword(password);
-        System.out.println(hashPair.getLeft());
-        System.out.println(hashPair.getRight());
-        System.out.println(passHasher.passwordEquals("test", hashPair.getRight(), hashPair.getLeft()));
-        System.out.println(passHasher.passwordEquals("testt", hashPair.getRight(), hashPair.getLeft()));
-    }
-
 }

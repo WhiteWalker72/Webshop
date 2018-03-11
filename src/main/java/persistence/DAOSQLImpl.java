@@ -1,5 +1,7 @@
 package persistence;
 
+import utils.MathUtils;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -52,12 +54,15 @@ public abstract class DAOSQLImpl<T> implements DAO<T> {
         return null;
     }
 
-    //TODO testing: Not sure if this works if the id isn't a string
     @Override
     public boolean delete(String identifier) {
         return database.deleteFrom(tableName, idColumn, statement -> {
             try {
-                statement.setString(1, identifier);
+                if (MathUtils.isInt(identifier)) {
+                    statement.setInt(1, Integer.parseInt(identifier));
+                } else {
+                    statement.setString(1, identifier);
+                }
             } catch (SQLException e) {
                 e.printStackTrace();
             }

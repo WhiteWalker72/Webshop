@@ -1,5 +1,7 @@
 package persistence;
 
+import utils.MathUtils;
+
 import java.sql.*;
 
 public abstract class SQLDatabase {
@@ -67,12 +69,15 @@ public abstract class SQLDatabase {
         return executeDBQuery("SELECT * FROM " + tableName);
     }
 
-    //TODO testing: Not sure if this works if the id isn't a string
     public ResultSet selectAllByID(String tableName, String idColumn, String id) {
         refreshConnection();
         try {
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM " + tableName + " WHERE " + idColumn + " = ?");
-            statement.setString(1, id);
+            if (MathUtils.isInt(id)) {
+                statement.setInt(1, Integer.parseInt(id));
+            } else {
+                statement.setString(1, id);
+            }
             ResultSet set = statement.executeQuery();
             endStatement(statement);
             return set;
