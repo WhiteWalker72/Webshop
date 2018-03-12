@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,6 +29,11 @@
             <li><a href="#">Nieuw</a></li>
         </ul>
     </div>
+</div>
+
+<div class="ms-content">
+
+
 </div>
 </body>
 </html>
