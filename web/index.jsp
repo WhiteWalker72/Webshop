@@ -5,8 +5,8 @@
     <title>Webshop</title>
 
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="style/style.css">
-    <script src="js/main.js"></script>
+    <link rel="stylesheet" type="text/css" href="/style/style.css">
+    <script src="/js/main.js"></script>
 
 </head>
 
