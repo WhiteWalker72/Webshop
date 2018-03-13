@@ -23,7 +23,7 @@ public abstract class SQLDatabase {
 
     abstract Connection getConnection(String address, int port, String databaseName, String username, String password);
 
-    private void refreshConnection() {
+    public void refreshConnection() {
         closeConnection();
         connection = getConnection(address, port, databaseName, username, password);
     }
@@ -77,9 +77,7 @@ public abstract class SQLDatabase {
             } else {
                 statement.setString(1, id);
             }
-            ResultSet set = statement.executeQuery();
-            endStatement(statement);
-            return set;
+            return statement.executeQuery();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -90,9 +88,7 @@ public abstract class SQLDatabase {
         refreshConnection();
         try {
             Statement statement = connection.createStatement();
-            ResultSet set = statement.executeQuery(query);
-            endStatement(statement);
-            return set;
+            return statement.executeQuery(query);
         } catch (SQLException e) {
             e.printStackTrace();
         }

@@ -13,7 +13,7 @@ public class MySQLDatabase extends SQLDatabase {
     @Override
     Connection getConnection(String address, int port, String databaseName, String username, String password) {
         try {
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
             try {
                 DriverManager.setLoginTimeout(6);
                 return DriverManager.getConnection("jdbc:mysql://" + address + ":"

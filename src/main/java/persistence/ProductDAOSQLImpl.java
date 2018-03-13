@@ -1,29 +1,28 @@
 package persistence;
 
+import dto.ProductDTO;
+import utils.SQLUtils;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Arrays;
-
-import dto.ProductDTO;
-import utils.SQLUtils;
 
 public class ProductDAOSQLImpl extends DAOSQLImpl<ProductDTO> {
 
     ProductDAOSQLImpl(SQLDatabase database) {
-        super(database, "Product", "Id");
+        super(database, "product", "Id");
     }
 
     @Override
     ProductDTO getObjectFromResultSet(ResultSet resultSet) {
         try {
             ProductDTO productDTO = new ProductDTO(
-                    resultSet.getInt("Id")
-                    , resultSet.getString("Naam")
-                    , resultSet.getString("Omschrijving"),
-                    resultSet.getString("Plaatje"));
+                    resultSet.getInt("id")
+                    , resultSet.getString("naam")
+                    , resultSet.getString("omschrijving"),
+                    resultSet.getString("afbeelding"));
 
-            String priceCol = "Prijs";
+            String priceCol = "prijs";
             if (SQLUtils.hasColumn(resultSet, priceCol)) {
                 productDTO.withPrice(resultSet.getInt(priceCol));
             }
@@ -59,8 +58,8 @@ public class ProductDAOSQLImpl extends DAOSQLImpl<ProductDTO> {
         if (findById(dto.getId() + "") == null) {
             throw new ObjectNotFoundException(tableName, "updating");
         }
-        PreparedStatement statement = database.getPreparedStatement("UPDATE " + tableName + " SET Naam = ?, Prijs = ?" +
-                ", Omschrijving = ?, Plaatje = ? WHERE Id = ?");
+        PreparedStatement statement = database.getPreparedStatement("UPDATE " + tableName + " SET naam = ?, prijs = ?" +
+                ", omschrijving = ?, afbeelding = ? WHERE id = ?");
         try {
             statement.setString(1, dto.getName());
             statement.setDouble(2, dto.getPrice());

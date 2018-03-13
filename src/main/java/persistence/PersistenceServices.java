@@ -12,7 +12,7 @@ public class PersistenceServices {
     private PersistenceServices() {
 
         //TODO: set daoFactory
-        //setDaoFactory(new DAOSQLFactory(new MySQLDatabase()));
+//        setDaoFactory(new DAOSQLFactory(new MySQLDatabase()));
     }
 
     public List<ProductDTO> getAllProducts() {
@@ -45,4 +45,5 @@ public class PersistenceServices {
         }
         return instance;
     }
+
 }
