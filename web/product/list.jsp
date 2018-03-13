@@ -19,7 +19,7 @@
 
             <div class="ms-product-cart" data-id="1">
                 <input type="text" class="ms-product-cart-amount" value="1">
-                <span class="ms-product-cart-button">+ Mand</span>
+                <span class="ms-button ms-product-cart-button">+ Mand</span>
             </div>
 
             <div class="ms-clear"></div>
