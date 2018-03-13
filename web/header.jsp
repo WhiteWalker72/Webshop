@@ -13,7 +13,7 @@
 <body>
 <div class="ms-header">
     <ul>
-        <li></li>
+        <li class="left"><a href="/" class="ms-logo"></a></li>
         <li class="ms-menu-categories"><a href="#">Assortiment</a></li>
         <li class="right"><a href="#">Mand</a></li>
         <li class="right"><a href="#">Account</a></li>
