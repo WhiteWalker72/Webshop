@@ -4,13 +4,15 @@
 
     <div class="ms-product">
 
-        <img class="ms-product-thumbnail" src="/images/mand.jpg" alt="Mand">
+        <a class="ms-product-info-link" href="/Product/1">
+            <img class="ms-product-thumbnail" src="/images/mand.jpg" alt="Mand">
 
-        <span class="ms-product-title">Mandje van Tichelaar</span>
+            <span class="ms-product-title">Mandje van Tichelaar</span>
 
-        <div class="ms-product-description">
-            Dit unieke mandje van Tichelaar, mandje tichelaar, MAND, is een one of a kind kunstobject.
-        </div>
+            <div class="ms-product-description">
+                Dit unieke mandje van Tichelaar, mandje tichelaar, MAND, is een one of a kind kunstobject.
+            </div>
+        </a>
         <div class="ms-product-actions">
             <div class="ms-product-info">
                 <span>&euro; 2199,99</span>
