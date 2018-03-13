@@ -55,8 +55,8 @@ public abstract class DAOSQLImpl<T> implements DAO<T> {
     }
 
     @Override
-    public boolean delete(String identifier) {
-        return database.deleteFrom(tableName, idColumn, statement -> {
+    public void  delete(String identifier) {
+        database.deleteFrom(tableName, idColumn, statement -> {
             try {
                 if (MathUtils.isInt(identifier)) {
                     statement.setInt(1, Integer.parseInt(identifier));
