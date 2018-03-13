@@ -41,7 +41,7 @@ public abstract class DAOSQLImpl<T> implements DAO<T> {
         if (identifier == null || identifier.equals("null")) {
             return null;
         }
-        ResultSet resultSet = database.selectAllByID(tableName, idColumn, identifier);
+        ResultSet resultSet = database.selectAllById(tableName, idColumn, identifier);
 
         if (resultSet != null) {
             try {
@@ -55,7 +55,7 @@ public abstract class DAOSQLImpl<T> implements DAO<T> {
     }
 
     @Override
-    public void  delete(String identifier) {
+    public void delete(String identifier) throws ObjectNotFoundException {
         database.deleteFrom(tableName, idColumn, statement -> {
             try {
                 if (MathUtils.isInt(identifier)) {

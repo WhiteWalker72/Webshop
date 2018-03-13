@@ -51,25 +51,24 @@ public abstract class SQLDatabase {
         return false;
     }
 
-    public boolean deleteFrom(String tableName, String idColumn, FillStatementStrategy fillStrategy) {
+    public void deleteFrom(String tableName, String idColumn, FillStatementStrategy fillStrategy) throws ObjectNotFoundException {
         refreshConnection();
         try {
             PreparedStatement statement = connection.prepareStatement("DELETE FROM " + tableName + " WHERE " + idColumn + " = ?");
             fillStrategy.fillStatement(statement);
             statement.executeUpdate();
             endStatement(statement);
-            return true;
         } catch (SQLException e) {
             e.printStackTrace();
+            throw new ObjectNotFoundException(tableName, "deleting");
         }
-        return false;
     }
 
     public ResultSet selectAll(String tableName) {
         return executeDBQuery("SELECT * FROM " + tableName);
     }
 
-    public ResultSet selectAllByID(String tableName, String idColumn, String id) {
+    public ResultSet selectAllById(String tableName, String idColumn, String id) {
         refreshConnection();
         try {
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM " + tableName + " WHERE " + idColumn + " = ?");
@@ -115,7 +114,17 @@ public abstract class SQLDatabase {
         }
     }
 
-    private void endStatement(Statement statement) {
+    PreparedStatement getPreparedStatement(String sql) {
+        refreshConnection();
+        try {
+            return connection.prepareStatement(sql);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    void endStatement(Statement statement) {
         try {
             statement.close();
         } catch (SQLException e) {
