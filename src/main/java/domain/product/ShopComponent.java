@@ -2,12 +2,12 @@ package domain.product;
 
 public class ShopComponent {
 
-    private final String ID;
+    private final String id;
     private final String name;
     private final String[] description;
 
-    public ShopComponent(String ID, String name, String[] description) {
-        this.ID = ID;
+    public ShopComponent(String id, String name, String[] description) {
+        this.id = id;
         this.name = name;
         this.description = description;
     }
