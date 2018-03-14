@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,10 +24,9 @@
 <div class="ms-categories-container">
     <div class="ms-categories">
         <ul>
-            <li><a href="#">Rieten manden</a></li>
-            <li><a href="#">Stalen manden</a></li>
-            <li><a href="#">Houten manden</a></li>
-            <li><a href="#">Nieuw</a></li>
+            <c:forEach var="category" items="${categories}">
+                <li><a href="#">${category.name}</a></li>
+            </c:forEach>
         </ul>
     </div>
 </div>
