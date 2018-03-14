@@ -1,4 +1,4 @@
-package domain.product;
+package domain.component;
 
 public class ShopComponent {
 
@@ -18,6 +18,10 @@ public class ShopComponent {
 
     public String getDescription() {
         return description;
+    }
+
+    public String getImageName() {
+        return imageName;
     }
 
 }

@@ -1,43 +1,19 @@
 package dto;
 
-public class ProductDTO {
+public class ProductDTO extends ComponentDTO {
 
-    private final int id;
-    private final String name;
-    private final String description;
-    private final String image;
-
-    private Double price;
+    private double price;
 
     public ProductDTO(int id, String name, String description, String image) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.image = image;
+        super(id, name, description, image);
     }
 
-    public ProductDTO withPrice(double price) {
+    public ComponentDTO withPrice(double price) {
         this.price = price;
         return this;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public String getImage() {
-        return image;
-    }
-
-    public Double getPrice() {
+    public double getPrice() {
         return price;
     }
 

@@ -1,4 +1,4 @@
-package domain.product;
+package domain.component;
 
 public class Product extends ShopComponent {
 

@@ -1,5 +1,6 @@
 package domain.category;
 
+@Deprecated
 public class Category {
 
     private String name;
