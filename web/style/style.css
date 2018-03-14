@@ -136,7 +136,7 @@ h1 {
 	display: block;
 }
 
-.ms-categories ul li a:hover {
+.ms-categories ul li a {
 
 	background-color: #447aa7;
 	color: #ffffff;
