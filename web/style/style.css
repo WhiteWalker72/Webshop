@@ -179,6 +179,13 @@ h1 {
     margin: 15px 30px 15px 0px;
 
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+
+    transition: .2s transform;
+}
+
+.ms-product:hover {
+
+    transform: scale(1.05);
 }
 
 .ms-product .ms-product-thumbnail {
