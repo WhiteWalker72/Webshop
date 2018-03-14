@@ -189,36 +189,36 @@ h1 {
     margin: 0 auto 5px auto;
 }
 
-.ms-product .ms-product-title {
+.ms-product-title {
 
     font-weight: bold;
 }
 
-.ms-product .ms-product-description {
+.ms-product-description {
 
 }
 
-.ms-product .ms-product-actions {
+.ms-product-actions {
 
     padding-top: 15px;
 }
 
-.ms-product .ms-product-actions .ms-product-info {
+.ms-product-actions .ms-product-info {
 
     float: left;
 }
 
-.ms-product .ms-product-actions .ms-product-info > span {
+.ms-product-actions .ms-product-info > span {
 
     display: block;
 }
 
-.ms-product .ms-product-actions .ms-product-cart {
+.ms-product-actions .ms-product-cart {
 
     float: right;
 }
 
-.ms-product .ms-product-actions .ms-product-cart .ms-product-cart-amount {
+.ms-product-actions .ms-product-cart .ms-product-cart-amount {
 
     width: 25px;
     height: 26px;
@@ -235,8 +235,8 @@ h1 {
     outline: none;
 }
 
-.ms-product .ms-product-actions .ms-product-cart .ms-product-cart-amount:hover,
-.ms-product .ms-product-actions .ms-product-cart .ms-product-cart-amount:focus {
+.ms-product-actions .ms-product-cart .ms-product-cart-amount:hover,
+.ms-product-actions .ms-product-cart .ms-product-cart-amount:focus {
 
     border-color: #48a6f2;
 }
@@ -301,4 +301,62 @@ h1 {
     text-align: center;
 
     outline: none;
+}
+
+.ms-product-details-container {
+
+    padding: 12px 17px;
+
+    background-color: #ffffff;
+
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+
+    position: relative;
+
+}
+
+.ms-product-details-container .ms-product-details-image {
+
+    width: 40%;
+    float: left;
+}
+
+.ms-product-details-container .ms-product-details {
+
+    float: right;
+    width: 60%;
+}
+
+.ms-product-details-container .ms-product-title {
+
+    font-size: 20pt;
+}
+
+.ms-product-details-container .ms-product-description {
+
+    margin-top: 10px;
+}
+
+.ms-product-details-container .ms-product-actions {
+
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    left: calc(40% + 3px);
+}
+
+.ms-breadcrumb {
+
+    margin: 10px 0;
+    color: #636363;
+}
+
+.ms-breadcrumb a {
+
+    color: #636363;
+}
+
+.ms-breadcrumb a:hover {
+
+    color: #000000;
 }
