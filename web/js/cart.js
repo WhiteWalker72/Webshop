@@ -2,17 +2,14 @@ class Cart {
 
     constructor() {
 
-        document.querySelector(".ms-product-cart-button").addEventListener("click", function() {
+        document.querySelector(".ms-product-cart-button").addEventListener("click", (event) => {
 
-            var result = request('/api/cart', 'post', {
-                "product": this.parentElement.dataset.id,
-                "amount": this.parentElement.querySelector('.ms-product-cart-amount').value
-            });
+            this.addToCart(event)
+        });
 
-            if(result) {
+        document.querySelector(".ms-cart-delete").addEventListener("click", (event) => {
 
-                alert('Product toegevoegd aan mand');
-            }
+            this.removeFromCart(event)
         });
 
         document.querySelector(".ms-menu-cart").addEventListener("click", function() {
@@ -27,5 +24,23 @@ class Cart {
                 event.target.classList.remove('ms-menu-active');
             }
         });
+    }
+
+    addToCart(event) {
+
+        var result = request('/api/cart', 'POST', {
+            "product": event.target.parentElement.dataset.id,
+            "amount": event.target.parentElement.querySelector('.ms-product-cart-amount').value
+        });
+
+        if(result) {
+
+            alert('Product toegevoegd aan mand');
+        }
+    }
+
+    removeFromCart(event) {
+
+        var result = request('/api/cart/' + event.target.parentElement.dataset.id, 'DELETE');
     }
 }

@@ -40,7 +40,7 @@
         <h2>Winkelmandje</h2>
 
         <table class="ms-cart-list">
-            <tr>
+            <tr data-id="1">
                 <td>Mand</td>
                 <td><input type="text" class="ms-cart-amount" value="1"></td>
                 <td>&euro; 21,99</td>
