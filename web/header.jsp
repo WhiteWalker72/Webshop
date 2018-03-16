@@ -8,10 +8,10 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="/style/style.css">
 
-    <script src="/js/rest.js"></script>
+    <script src="/js/utils/rest.js"></script>
+    <script src="/js/controller/CartController.js"></script>
+    <script src="/js/controller/CategoryController.js"></script>
     <script src="/js/main.js"></script>
-    <script src="/js/cart.js"></script>
-
 </head>
 
 <body>

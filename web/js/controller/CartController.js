@@ -1,4 +1,4 @@
-class Cart {
+class CartController {
 
     constructor() {
 
