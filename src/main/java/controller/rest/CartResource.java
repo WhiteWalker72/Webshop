@@ -4,7 +4,6 @@ import domain.product.Product;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 @Path("/cart")
