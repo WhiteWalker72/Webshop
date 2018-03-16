@@ -60,11 +60,6 @@ public class ComponentServiceCategoryTest {
         }
     }
 
-    @Test
-    void categoryShouldBeDeletedTest() {
-        assertEquals(null, compServices.getCategory(1));
-    }
-
     private void addTestCategory() throws ObjectAlreadyExistsException {
         compServices.addNewCategory(new CategoryDTO(1, "test category", "JUnit test"
                 , "image", new ArrayList<>()));

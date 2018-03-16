@@ -79,11 +79,6 @@ public class ComponentServicesProductTest {
         }
     }
 
-    @Test
-    void productShouldBeDeletedTest() {
-        assertEquals(null, compServices.getProduct(1));
-    }
-
     private void addTestProduct() throws ObjectAlreadyExistsException {
         compServices.addNewProduct(new ProductDTO(1, "test product", "JUnit test", "image"
                 , 1)

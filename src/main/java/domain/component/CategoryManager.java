@@ -3,6 +3,7 @@ package domain.component;
 import dto.CategoryDTO;
 import exceptions.ObjectAlreadyExistsException;
 import exceptions.ObjectNotFoundException;
+import persistence.PersistenceServices;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -15,7 +16,8 @@ public class CategoryManager implements IComponentManager<Category, CategoryDTO>
     CategoryManager(ProductManager productManager) {
         componentMapper = new CategoryComponentMapper(this, productManager);
 
-        //TODO: load all categories
+        // Load all categories from the db
+        PersistenceServices.getInstance().findAllCategories().forEach(dto -> categoryIdMap.put(dto.getId(), componentMapper.toDomainObject(dto)));
     }
 
     @Override
@@ -25,8 +27,7 @@ public class CategoryManager implements IComponentManager<Category, CategoryDTO>
         }
         Category category = componentMapper.toDomainObject(compDTO);
         categoryIdMap.put(compDTO.getId(), category);
-        //TODO:
-        //PersistenceServices.getInstance().insertCategory(compDTO);
+        PersistenceServices.getInstance().insertCategory(compDTO);
     }
 
     @Override
@@ -36,8 +37,7 @@ public class CategoryManager implements IComponentManager<Category, CategoryDTO>
             throw new ObjectNotFoundException("category", "when deleting in CategoryManager");
         }
         categoryIdMap.remove(id);
-        //TODO:
-        //PersistenceServices.getInstance().deleteCategory(id + "");
+        PersistenceServices.getInstance().deleteCategory(id + "");
     }
 
     @Override
@@ -62,7 +62,7 @@ public class CategoryManager implements IComponentManager<Category, CategoryDTO>
         }
         if (category.getProductList().contains(product)) {
             category.getProductList().remove(product);
-            //TODO: save category in persistence
+            PersistenceServices.getInstance().updateCategory(componentMapper.toDTO(category));
         }
     }
 
@@ -73,7 +73,7 @@ public class CategoryManager implements IComponentManager<Category, CategoryDTO>
         }
         if (!category.getProductList().contains(product)) {
             category.getProductList().add(product);
-            //TODO: save category in persistence
+            PersistenceServices.getInstance().updateCategory(componentMapper.toDTO(category));
         }
     }
 

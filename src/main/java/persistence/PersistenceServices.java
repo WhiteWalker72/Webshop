@@ -1,5 +1,6 @@
 package persistence;
 
+import dto.CategoryDTO;
 import dto.ProductDTO;
 import exceptions.ObjectAlreadyExistsException;
 import exceptions.ObjectNotFoundException;
@@ -46,6 +47,26 @@ public class PersistenceServices {
 
     public void deleteProduct(String identifier) throws ObjectNotFoundException {
         daoFactory.getProductDAO().delete(identifier);
+    }
+
+    public List<CategoryDTO> findAllCategories() {
+        return daoFactory.getCategoryDAO().findAll();
+    }
+
+    public CategoryDTO findCategoryById(String identifier) throws ObjectNotFoundException {
+        return daoFactory.getCategoryDAO().findById(identifier);
+    }
+
+    public void insertCategory(CategoryDTO categoryDTO) throws ObjectAlreadyExistsException {
+        daoFactory.getCategoryDAO().insert(categoryDTO);
+    }
+
+    public void updateCategory(CategoryDTO categoryDTO) throws ObjectNotFoundException {
+        daoFactory.getCategoryDAO().update(categoryDTO);
+    }
+
+    public void deleteCategory(String identifier) throws ObjectNotFoundException {
+        daoFactory.getCategoryDAO().delete(identifier);
     }
 
     public void setDaoFactory(IDAOFactory daoFactory) {

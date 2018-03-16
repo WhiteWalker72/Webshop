@@ -101,7 +101,7 @@ public class ComponentServiceIntegrationTest {
         try {
             compServices.deleteCategory(compServices.getCategory(1));
         } catch (ObjectNotFoundException e) {
-            e.printStackTrace();
+
         }
     }
 
@@ -111,7 +111,7 @@ public class ComponentServiceIntegrationTest {
                     , 1)
                     .withPrice(5.0));
         } catch (ObjectAlreadyExistsException e) {
-            e.printStackTrace();
+
         }
     }
 

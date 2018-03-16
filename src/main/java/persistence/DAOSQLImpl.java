@@ -32,7 +32,9 @@ public abstract class DAOSQLImpl<T> implements DAO<T> {
                 while (resultSet.next()) {
                     list.add(getObjectFromResultSet(resultSet));
                 }
-                database.endStatement(resultSet.getStatement());
+                if (!resultSet.isClosed()) {
+                    database.endStatement(resultSet.getStatement());
+                }
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -52,9 +54,11 @@ public abstract class DAOSQLImpl<T> implements DAO<T> {
 
                 resultSet.next();
                 T object = getObjectFromResultSet(resultSet);
-                database.endStatement(resultSet.getStatement());
-                return object;
 
+                if (!resultSet.isClosed()) {
+                    database.endStatement(resultSet.getStatement());
+                }
+                return object;
             }
         } catch (SQLException e) {
             e.printStackTrace();

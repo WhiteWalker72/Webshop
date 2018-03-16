@@ -20,13 +20,14 @@ public abstract class SQLDatabase {
         this.databaseName = databaseName;
         this.username = username;
         this.password = password;
+        connection = getConnection(address, port, databaseName, username, password);
     }
 
     abstract Connection getConnection(String address, int port, String databaseName, String username, String password);
 
     public void refreshConnection() {
-        closeConnection();
-        connection = getConnection(address, port, databaseName, username, password);
+/*        closeConnection();
+        connection = getConnection(address, port, databaseName, username, password);*/
     }
 
     public boolean insertInto(String tableName, int amountOfValues, FillStatementStrategy fillStrategy) {
@@ -122,12 +123,12 @@ public abstract class SQLDatabase {
     }
 
     void endStatement(Statement statement) {
-        try {
+       /* try {
             statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        closeConnection();
+        closeConnection();*/
     }
 
 }
