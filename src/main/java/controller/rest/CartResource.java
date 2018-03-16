@@ -30,6 +30,7 @@ public class CartResource {
 
             ArrayList<Product> cart = new ArrayList<>();
 
+            //TODO: product should be package private, use ComponentServices instead
             cart.add(new Product("1","Mandje", 2.0, "1"));
 
             session.setAttribute("cart", cart);

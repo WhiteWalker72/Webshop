@@ -1,6 +1,8 @@
 package persistence;
 
 import dto.ProductDTO;
+import exceptions.ObjectAlreadyExistsException;
+import exceptions.ObjectNotFoundException;
 import utils.SQLUtils;
 
 import java.sql.PreparedStatement;
@@ -37,7 +39,7 @@ public class ProductDAOSQLImpl extends DAOSQLImpl<ProductDTO> {
     @Override
     public void insert(ProductDTO dto) throws ObjectAlreadyExistsException {
         if (findById(dto.getId() + "") != null) {
-            throw new ObjectAlreadyExistsException(tableName);
+            throw new ObjectAlreadyExistsException(tableName, "the database");
         }
 
         database.insertInto(tableName, 5, statement -> {

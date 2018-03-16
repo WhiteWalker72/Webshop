@@ -5,6 +5,10 @@ import dto.CategoryDTO;
 import dto.ComponentDTO;
 import dto.ProductDTO;
 
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
+
 public class ComponentMapper implements DTOMapper<ShopComponent, ComponentDTO> {
 
     private final ComponentManager compManager;
@@ -21,8 +25,10 @@ public class ComponentMapper implements DTOMapper<ShopComponent, ComponentDTO> {
             return new ProductDTO(id, domainObject.getName(), domainObject.getDescription(), domainObject.getImageName())
                     .withPrice(((Product) domainObject).getPrice());
         } else if (domainObject instanceof Category) {
+            List<ShopComponent> categoryProducts = ((Category) domainObject).getProductList();
+
             return new CategoryDTO(id, domainObject.getName(), domainObject.getDescription(), domainObject.getImageName()
-                    , ((Category) domainObject).getProductIdList());
+                    , categoryProducts.stream().map(compManager::getId).filter(Objects::nonNull).collect(Collectors.toList()));
         }
         return new ComponentDTO(id, domainObject.getName(), domainObject.getDescription(), domainObject.getImageName());
     }
@@ -32,7 +38,10 @@ public class ComponentMapper implements DTOMapper<ShopComponent, ComponentDTO> {
         if (dto instanceof ProductDTO) {
             return new Product(dto.getName(), dto.getDescription(), ((ProductDTO) dto).getPrice(), dto.getImage());
         } else if (dto instanceof CategoryDTO) {
-            return new Category(dto.getName(), dto.getDescription(), dto.getImage(), ((CategoryDTO) dto).getProductIdList());
+            List<Integer> productIdList = ((CategoryDTO) dto).getProductIdList();
+
+            return new Category(dto.getName(), dto.getDescription(), dto.getImage(),
+                    productIdList.stream().map(compManager::getProduct).filter(Objects::nonNull).collect(Collectors.toList()));
         }
         return new ShopComponent(dto.getName(), dto.getDescription(), dto.getImage());
     }

@@ -4,15 +4,15 @@ import java.util.List;
 
 public class Category extends ShopComponent {
 
-    private final List<Integer> productIdList;
+    private final List<ShopComponent> productList;
 
-    public Category(String name, String description, String imageName, List<Integer> productIdList) {
+    Category(String name, String description, String imageName, List<ShopComponent> productList) {
         super(name, description, imageName);
-        this.productIdList = productIdList;
+        this.productList = productList;
     }
 
-    public List<Integer> getProductIdList() {
-        return productIdList;
+    List<ShopComponent> getProductList() {
+        return productList;
     }
 
 }

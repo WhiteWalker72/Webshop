@@ -1,6 +1,8 @@
 package persistence;
 
 import dto.ProductDTO;
+import exceptions.ObjectAlreadyExistsException;
+import exceptions.ObjectNotFoundException;
 
 import java.io.FileInputStream;
 import java.io.IOException;
