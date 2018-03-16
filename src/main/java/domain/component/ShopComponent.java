@@ -6,7 +6,7 @@ public class ShopComponent {
     private final String description;
     private final String imageName;
 
-    public ShopComponent(String name, String description, String imageName) {
+    ShopComponent(String name, String description, String imageName) {
         this.name = name;
         this.description = description;
         this.imageName = imageName;
