@@ -5,7 +5,9 @@ import exceptions.ObjectAlreadyExistsException;
 import exceptions.ObjectNotFoundException;
 import persistence.PersistenceServices;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class CategoryManager implements IComponentManager<Category, CategoryDTO> {
@@ -53,6 +55,10 @@ public class CategoryManager implements IComponentManager<Category, CategoryDTO>
     @Override
     public Category getComponent(int id) {
         return categoryIdMap.get(id);
+    }
+
+    public List<Category> getAllCategories() {
+        return new ArrayList<>(categoryIdMap.values());
     }
 
     public void removeProductFromCategory(Product product, Category category) throws ObjectNotFoundException {

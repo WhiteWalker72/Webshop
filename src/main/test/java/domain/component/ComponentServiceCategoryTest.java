@@ -4,7 +4,9 @@ import dto.CategoryDTO;
 import exceptions.ObjectAlreadyExistsException;
 import exceptions.ObjectNotFoundException;
 import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import persistence.PersistenceServices;
 
 import java.util.ArrayList;
 
@@ -14,8 +16,12 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class ComponentServiceCategoryTest {
 
-    //TODO: set persistenceDB to test db
     private static ComponentServices compServices = new ComponentServices();
+
+    @BeforeAll
+    static void init() {
+        PersistenceServices.getInstance().switchToTestDatabase();
+    }
 
     @Test
     void categoryDoesNotExistTest() {
@@ -49,7 +55,7 @@ public class ComponentServiceCategoryTest {
         try {
             addTestCategory();
         } catch (ObjectAlreadyExistsException e) {
-            e.printStackTrace();
+
         }
         assertThrows(ObjectAlreadyExistsException.class, this::addTestCategory);
 
@@ -71,6 +77,7 @@ public class ComponentServiceCategoryTest {
 
     @AfterAll
     static void tearDown() {
+
         compServices = null;
     }
 

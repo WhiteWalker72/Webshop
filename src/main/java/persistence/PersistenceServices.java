@@ -29,6 +29,26 @@ public class PersistenceServices {
         }
     }
 
+    public static PersistenceServices getInstance() {
+        if (instance == null) {
+            instance = new PersistenceServices();
+        }
+        return instance;
+    }
+
+    public void switchToTestDatabase() {
+        try {
+            InputStream input = new FileInputStream("config.properties");
+            Properties prop = new Properties();
+            prop.load(input);
+
+            setDaoFactory(new DAOSQLFactory(new MySQLDatabase(prop.getProperty("test_address"), Integer.parseInt(prop.getProperty("test_port"))
+                    , prop.getProperty("test_database"), prop.getProperty("test_username"), prop.getProperty("test_password"))));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public List<ProductDTO> findAllProducts() {
         return daoFactory.getProductDAO().findAll();
     }
@@ -71,13 +91,6 @@ public class PersistenceServices {
 
     public void setDaoFactory(IDAOFactory daoFactory) {
         this.daoFactory = daoFactory;
-    }
-
-    public static PersistenceServices getInstance() {
-        if (instance == null) {
-            instance = new PersistenceServices();
-        }
-        return instance;
     }
 
 }

@@ -4,3 +4,10 @@ port = 3306
 database = db
 username = gebruiker
 password = wachtwoord
+
+test_type = mysql
+test_address = @website.tld
+test_port = 3306
+test_database = db
+test_username = gebruiker
+test_password = wachtwoord

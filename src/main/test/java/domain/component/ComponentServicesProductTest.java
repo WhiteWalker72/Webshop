@@ -5,14 +5,20 @@ import exceptions.InvalidAmountException;
 import exceptions.ObjectAlreadyExistsException;
 import exceptions.ObjectNotFoundException;
 import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import persistence.PersistenceServices;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class ComponentServicesProductTest {
 
-    //TODO: set persistenceDB to test db
     private static ComponentServices compServices = new ComponentServices();
+
+    @BeforeAll
+    static void init() {
+        PersistenceServices.getInstance().switchToTestDatabase();
+    }
 
     @Test
     void productDoesNotExistTest() {

@@ -6,6 +6,8 @@ import exceptions.InvalidAmountException;
 import exceptions.ObjectAlreadyExistsException;
 import exceptions.ObjectNotFoundException;
 
+import java.util.List;
+
 public class ComponentServices {
 
     private final ProductManager productManager;
@@ -14,6 +16,10 @@ public class ComponentServices {
     public ComponentServices() {
         productManager = new ProductManager();
         categoryManager = new CategoryManager(productManager);
+    }
+
+    public List<Category> getAllCategories() {
+        return categoryManager.getAllCategories();
     }
 
     public Category getCategory(int id) {
