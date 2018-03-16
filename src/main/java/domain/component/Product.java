@@ -1,11 +1,11 @@
-package domain.product;
+package domain.component;
 
 public class Product extends ShopComponent {
 
     private final double price;
 
-    public Product(String id, String name, String description, double price) {
-        super(id, name, description);
+    public Product(String name, String description, double price, String imageName) {
+        super(name, description, imageName);
         this.price = price;
     }
 

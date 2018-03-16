@@ -1,15 +1,15 @@
-package domain.product;
+package domain.component;
 
 public class ShopComponent {
 
-    private final String id;
     private final String name;
     private final String description;
+    private final String imageName;
 
-    public ShopComponent(String id, String name, String description) {
-        this.id = id;
+    public ShopComponent(String name, String description, String imageName) {
         this.name = name;
         this.description = description;
+        this.imageName = imageName;
     }
 
     public String getName() {
@@ -18,6 +18,10 @@ public class ShopComponent {
 
     public String getDescription() {
         return description;
+    }
+
+    public String getImageName() {
+        return imageName;
     }
 
 }

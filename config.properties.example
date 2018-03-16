@@ -1,5 +1,6 @@
 type = mysql
 address = @website.tld
 port = 3306
+database = db
 username = gebruiker
 password = wachtwoord

@@ -2,7 +2,11 @@ package persistence;
 
 import dto.ProductDTO;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
+import java.util.Properties;
 
 public class PersistenceServices {
 
@@ -10,16 +14,23 @@ public class PersistenceServices {
     private IDAOFactory daoFactory;
 
     private PersistenceServices() {
+        try {
+            InputStream input = new FileInputStream("config.properties");
+            Properties prop = new Properties();
+            prop.load(input);
 
-        //TODO: set daoFactory
-//        setDaoFactory(new DAOSQLFactory(new MySQLDatabase()));
+            setDaoFactory(new DAOSQLFactory(new MySQLDatabase(prop.getProperty("address"), Integer.parseInt(prop.getProperty("port"))
+                    , prop.getProperty("database"), prop.getProperty("username"), prop.getProperty("password"))));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
-    public List<ProductDTO> getAllProducts() {
+    public List<ProductDTO> findAllProducts() {
         return daoFactory.getProductDAO().findAll();
     }
 
-    public ProductDTO getProductById(String identifier) throws ObjectNotFoundException {
+    public ProductDTO findProductById(String identifier) throws ObjectNotFoundException {
         return daoFactory.getProductDAO().findById(identifier);
     }
 
