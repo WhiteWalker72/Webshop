@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class ComponentServiceCategoryTest {
 
-    private static ComponentServices compServices = new ComponentServices();
+    private static ComponentServices compServices = ComponentServices.getInstance();
 
     @BeforeAll
     static void init() {
@@ -64,6 +64,11 @@ public class ComponentServiceCategoryTest {
         } catch (ObjectNotFoundException e) {
             e.printStackTrace();
         }
+    }
+
+    @Test
+    void allCategoriesNotNullTest() {
+        assertNotEquals(null, compServices.getAllCategories());
     }
 
     private void addTestCategory() throws ObjectAlreadyExistsException {

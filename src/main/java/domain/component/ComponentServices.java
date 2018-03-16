@@ -10,15 +10,20 @@ import java.util.List;
 
 public class ComponentServices {
 
+    private static ComponentServices instance;
+
     private final ProductManager productManager;
     private final CategoryManager categoryManager;
 
-    public ComponentServices() {
+    private ComponentServices() {
         productManager = new ProductManager();
         categoryManager = new CategoryManager(productManager);
     }
 
     public List<Category> getAllCategories() {
+        for (Category category : categoryManager.getAllCategories()) {
+            System.out.println(category.getName());
+        }
         return categoryManager.getAllCategories();
     }
 
@@ -56,6 +61,12 @@ public class ComponentServices {
 
     public void addProductToCategory(Product product, Category category) throws ObjectNotFoundException {
         categoryManager.addProductToCategory(product, category);
+    }
+
+    public static ComponentServices getInstance() {
+        if (instance == null)
+            instance = new ComponentServices();
+        return instance;
     }
 
 }

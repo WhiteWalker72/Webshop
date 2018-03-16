@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class ComponentServicesProductTest {
 
-    private static ComponentServices compServices = new ComponentServices();
+    private static ComponentServices compServices = ComponentServices.getInstance();
 
     @BeforeAll
     static void init() {
