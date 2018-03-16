@@ -41,7 +41,7 @@ public abstract class SQLDatabase {
 
         refreshConnection();
         try {
-            PreparedStatement statement = connection.prepareStatement("INSERT INTO " + tableName + " VALUES(" + questionMarks.toString() + ")");
+            PreparedStatement statement = connection.prepareStatement("INSERT INTO " + tableName + " VALUES(" + questionMarks.toString() + ");");
             fillStrategy.fillStatement(statement);
             statement.executeUpdate();
             endStatement(statement);

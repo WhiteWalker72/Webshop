@@ -21,8 +21,9 @@ public class ProductDAOSQLImpl extends DAOSQLImpl<ProductDTO> {
             ProductDTO productDTO = new ProductDTO(
                     resultSet.getInt("id")
                     , resultSet.getString("naam")
-                    , resultSet.getString("omschrijving"),
-                    resultSet.getString("afbeelding"));
+                    , resultSet.getString("omschrijving")
+                    , resultSet.getString("afbeelding")
+                    , resultSet.getInt("voorraad"));
 
             String priceCol = "prijs";
             if (SQLUtils.hasColumn(resultSet, priceCol)) {
@@ -42,13 +43,14 @@ public class ProductDAOSQLImpl extends DAOSQLImpl<ProductDTO> {
             throw new ObjectAlreadyExistsException(tableName, "the database");
         }
 
-        database.insertInto(tableName, 5, statement -> {
+        database.insertInto(tableName, 6, statement -> {
             try {
                 statement.setInt(1, dto.getId());
                 statement.setString(2, dto.getName());
                 statement.setDouble(3, dto.getPrice());
                 statement.setString(4, dto.getDescription());
                 statement.setString(5, dto.getImage());
+                statement.setInt(6, dto.getAmountStored());
             } catch (SQLException e) {
                 e.printStackTrace();
             }

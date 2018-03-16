@@ -25,15 +25,17 @@ public abstract class DAOSQLImpl<T> implements DAO<T> {
         ResultSet resultSet = database.selectAll(tableName);
         List<T> list = new ArrayList<>();
 
-        if (resultSet != null) {
-            try {
+        try {
+            if (resultSet != null && resultSet.next()) {
+                resultSet.beforeFirst();
+
                 while (resultSet.next()) {
                     list.add(getObjectFromResultSet(resultSet));
                 }
                 database.endStatement(resultSet.getStatement());
-            } catch (SQLException e) {
-                e.printStackTrace();
             }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
         return list;
     }
@@ -44,16 +46,18 @@ public abstract class DAOSQLImpl<T> implements DAO<T> {
             return null;
         }
         ResultSet resultSet = database.selectAllById(tableName, idColumn, identifier);
+        try {
+            if (resultSet != null && resultSet.next()) {
+                resultSet.beforeFirst();
 
-        if (resultSet != null) {
-            try {
                 resultSet.next();
                 T object = getObjectFromResultSet(resultSet);
                 database.endStatement(resultSet.getStatement());
                 return object;
-            } catch (SQLException e) {
-                e.printStackTrace();
+
             }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
         return null;
     }
