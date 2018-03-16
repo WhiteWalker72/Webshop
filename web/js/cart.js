@@ -1,28 +1,31 @@
-window.onload = function() {
+class Cart {
 
-    document.querySelector(".ms-product-cart-button").addEventListener("click", function() {
+    constructor() {
 
-       var result = request('/api/cart', 'post', {
-            "product": this.parentElement.dataset.id,
-            "amount": this.parentElement.querySelector('.ms-product-cart-amount').value
-       });
+        document.querySelector(".ms-product-cart-button").addEventListener("click", function() {
 
-       if(result) {
+            var result = request('/api/cart', 'post', {
+                "product": this.parentElement.dataset.id,
+                "amount": this.parentElement.querySelector('.ms-product-cart-amount').value
+            });
 
-           alert('Product toegevoegd aan mand');
-       }
-    });
+            if(result) {
 
-    document.querySelector(".ms-menu-cart").addEventListener("click", function() {
+                alert('Product toegevoegd aan mand');
+            }
+        });
 
-        var cElement = document.querySelector('.ms-cart-container');
+        document.querySelector(".ms-menu-cart").addEventListener("click", function() {
 
-        if (cElement.style.display === "none" || cElement.style.display === "") {
-            cElement.style.display = "block";
-            event.target.classList.add('ms-menu-active');
-        } else {
-            cElement.style.display = "none";
-            event.target.classList.remove('ms-menu-active');
-        }
-    });
+            var cElement = document.querySelector('.ms-cart-container');
+
+            if (cElement.style.display === "none" || cElement.style.display === "") {
+                cElement.style.display = "block";
+                event.target.classList.add('ms-menu-active');
+            } else {
+                cElement.style.display = "none";
+                event.target.classList.remove('ms-menu-active');
+            }
+        });
+    }
 }

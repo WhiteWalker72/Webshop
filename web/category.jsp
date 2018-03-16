@@ -1,4 +1,4 @@
-<jsp:include page="/header.jsp">
+<jsp:include page="/header">
     <jsp:param value="Categorie - ${id}" name="title"/>
 </jsp:include>
 
