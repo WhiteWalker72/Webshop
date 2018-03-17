@@ -1,5 +1,6 @@
 package persistence;
 
+import dto.AddressDTO;
 import dto.CategoryDTO;
 import dto.OfferDTO;
 import dto.ProductDTO;
@@ -18,7 +19,7 @@ public class PersistenceServices {
     private IDAOFactory daoFactory;
 
     private PersistenceServices() {
-        
+
     }
 
     public static PersistenceServices getInstance() {
@@ -101,8 +102,28 @@ public class PersistenceServices {
         daoFactory.getOfferDAO().delete(identifier);
     }
 
+    public AddressDTO findAddressById(String identifier) {
+        return daoFactory.getAddressDAO().findById(identifier);
+    }
+
+    public void insertAddress(AddressDTO addressDTO) throws ObjectAlreadyExistsException {
+        daoFactory.getAddressDAO().insert(addressDTO);
+    }
+
+    public void updateAddress(AddressDTO addressDTO) throws ObjectNotFoundException {
+        daoFactory.getAddressDAO().update(addressDTO);
+    }
+
+    public void deleteAddress(String identifier) throws ObjectNotFoundException {
+        daoFactory.getAddressDAO().delete(identifier);
+    }
+
     public void setDaoFactory(IDAOFactory daoFactory) {
         this.daoFactory = daoFactory;
+    }
+
+    public static void main(String[] args) {
+        PersistenceServices.getInstance();
     }
 
 }

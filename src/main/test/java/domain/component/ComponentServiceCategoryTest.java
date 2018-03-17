@@ -83,7 +83,6 @@ public class ComponentServiceCategoryTest {
 
     @AfterAll
     static void tearDown() {
-
         compServices = null;
     }
 

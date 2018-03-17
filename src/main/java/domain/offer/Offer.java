@@ -30,7 +30,6 @@ public class Offer {
 
     public boolean isActive() {
         if (getProduct() == null) {
-            System.out.println("no product");
             return false;
         }
         Date currentDate = new Date();

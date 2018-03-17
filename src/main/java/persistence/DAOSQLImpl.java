@@ -68,6 +68,10 @@ public abstract class DAOSQLImpl<T> implements DAO<T> {
 
     @Override
     public void delete(String identifier) throws ObjectNotFoundException {
+        if (findById(identifier) == null) {
+            throw new ObjectNotFoundException("object", "deleting", identifier);
+        }
+
         database.deleteFrom(tableName, idColumn, statement -> {
             try {
                 if (MathUtils.isInt(identifier)) {
