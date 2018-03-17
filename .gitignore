@@ -138,3 +138,6 @@ local.properties
 hs_err_pid*
 
 config.properties
+
+ConnectionDetails.java
+ConnectionDetails.class
