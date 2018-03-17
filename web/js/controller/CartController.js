@@ -7,7 +7,9 @@ class CartController {
             this.addToCart(event)
         });
 
-        document.querySelector(".ms-cart-delete").addEventListener("click", (event) => {
+        var deleteButton = document.querySelector(".ms-cart-delete");
+
+        deleteButton && deleteButton.addEventListener("click", (event) => {
 
             this.removeFromCart(event)
         });
@@ -29,7 +31,7 @@ class CartController {
     addToCart(event) {
 
         var result = request('/api/cart', 'POST', {
-            "product": event.target.parentElement.dataset.id,
+            "id": event.target.parentElement.dataset.id,
             "amount": event.target.parentElement.querySelector('.ms-product-cart-amount').value
         });
 
