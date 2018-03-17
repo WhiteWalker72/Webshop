@@ -13,11 +13,12 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class ComponentServicesProductTest {
 
-    private static ComponentServices compServices = ComponentServices.getInstance();
+    private static ComponentServices compServices;
 
     @BeforeAll
     static void init() {
         PersistenceServices.getInstance().switchToTestDatabase();
+        compServices = ComponentServices.getInstance();
     }
 
     @Test

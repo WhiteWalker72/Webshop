@@ -22,7 +22,7 @@ class CategoryComponentMapper extends ComponentMapper<Category, CategoryDTO> {
 
     @Override
     public Category toDomainObject(CategoryDTO dto) {
-        return new Category(dto.getName(), dto.getDescription(), dto.getImage(),
+        return new Category(dto.getId(), dto.getName(), dto.getDescription(), dto.getImage(),
                 dto.getProductIdList().stream().map(productManager::getComponent).filter(Objects::nonNull).collect(Collectors.toList()));
     }
 

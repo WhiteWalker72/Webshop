@@ -6,7 +6,9 @@ import exceptions.ObjectAlreadyExistsException;
 import exceptions.ObjectNotFoundException;
 import persistence.PersistenceServices;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class ProductManager implements IComponentManager<Product, ProductDTO> {
@@ -59,6 +61,10 @@ public class ProductManager implements IComponentManager<Product, ProductDTO> {
         Product p = productIdMap.get(id);
 
         return componentMapper.toDTO(p);
+    }
+
+    public List<Product> getAllProducts() {
+        return new ArrayList<>(productIdMap.values());
     }
 
     public void lowerProductAmount(Product product) throws ObjectNotFoundException, InvalidAmountException {

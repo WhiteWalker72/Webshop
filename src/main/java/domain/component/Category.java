@@ -6,8 +6,8 @@ public class Category extends ShopComponent {
 
     private final List<ShopComponent> productList;
 
-    Category(String name, String description, String imageName, List<ShopComponent> productList) {
-        super(name, description, imageName);
+    Category(int id, String name, String description, String imageName, List<ShopComponent> productList) {
+        super(id, name, description, imageName);
         this.productList = productList;
     }
 

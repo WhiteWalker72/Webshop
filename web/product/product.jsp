@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <jsp:include page="/header">
-    <jsp:param value="Product - ${id}" name="title"/>
+    <jsp:param value="Product - ${product.getId()}" name="title"/>
 </jsp:include>
 
 <div class="ms-breadcrumb">
@@ -12,22 +12,22 @@
 <div class="ms-product-details-container">
 
 
-        <img class="ms-product-details-image" src="/images/products/${product.image}.jpg" alt="Mand">
+    <img class="ms-product-details-image" src="/images/products/${product.getImageName()}.jpg" alt="Mand">
 
-        <div class="ms-product-details">
+    <div class="ms-product-details">
 
-            <span class="ms-product-title">${product.name}</span>
+        <span class="ms-product-title">${product.getName()}</span>
 
-            <div class="ms-product-description">
-                ${product.description}
-            </div>
+        <div class="ms-product-description">
+            ${product.getDescription()}
+        </div>
 
-            <div class="ms-product-actions">
-                <div class="ms-product-info">
-                    <span>&euro; ${product.price}</span>
-                    <span>
+        <div class="ms-product-actions">
+            <div class="ms-product-info">
+                <span>&euro; ${product.getPrice()}</span>
+                <span>
                     <c:choose>
-                        <c:when test="${product.amountStored > 0}">
+                        <c:when test="${product.getAmountStored() > 0}">
                             Op voorraad
                         </c:when>
                         <c:otherwise>
@@ -35,19 +35,19 @@
                         </c:otherwise>
                     </c:choose>
                     </span>
-                </div>
+            </div>
 
-                <div class="ms-product-cart" data-id="1">
-                    <input type="text" class="ms-product-cart-amount" value="1">
-                    <span class="ms-button ms-product-cart-button">+ Mand</span>
-                </div>
-
+            <div class="ms-product-cart" data-id="1">
+                <input type="text" class="ms-product-cart-amount" value="1">
+                <span class="ms-button ms-product-cart-button">+ Mand</span>
             </div>
 
         </div>
 
-    <div class="ms-clear"></div>
     </div>
+
+    <div class="ms-clear"></div>
+</div>
 
 </div>
 <jsp:include page="/footer.jsp"></jsp:include>

@@ -17,7 +17,7 @@ class ProductComponentMapper extends ComponentMapper<Product, ProductDTO> {
 
     @Override
     public Product toDomainObject(ProductDTO dto) {
-        return new Product(dto.getName(), dto.getDescription(), dto.getPrice(), dto.getImage(), dto.getAmountStored());
+        return new Product(dto.getId(), dto.getName(), dto.getDescription(), dto.getPrice(), dto.getImage(), dto.getAmountStored());
     }
 
 }

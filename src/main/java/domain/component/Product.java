@@ -7,8 +7,8 @@ public class Product extends ShopComponent {
     private final double price;
     private int amountStored;
 
-    public Product(String name, String description, double price, String imageName, int amountStored) {
-        super(name, description, imageName);
+    public Product(int id, String name, String description, double price, String imageName, int amountStored) {
+        super(id, name, description, imageName);
         this.price = price;
         this.amountStored = amountStored;
     }

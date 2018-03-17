@@ -21,9 +21,6 @@ public class ComponentServices {
     }
 
     public List<Category> getAllCategories() {
-        for (Category category : categoryManager.getAllCategories()) {
-            System.out.println(category.getName());
-        }
         return categoryManager.getAllCategories();
     }
 
@@ -39,12 +36,12 @@ public class ComponentServices {
         categoryManager.deleteComponent(category);
     }
 
-    public Product getProduct(int id) {
-        return productManager.getComponent(id);
+    public List<Product> getAllProducts() {
+        return productManager.getAllProducts();
     }
 
-    public ProductDTO getProductDTO(int id) {
-        return productManager.getComponentDTO(id);
+    public Product getProduct(int id) {
+        return productManager.getComponent(id);
     }
 
     public void addNewProduct(ProductDTO productDTO) throws ObjectAlreadyExistsException {
