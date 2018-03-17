@@ -6,7 +6,7 @@
 </jsp:include>
 
 <div class="ms-breadcrumb">
-    <a href="#">Products</a> > <a href="#">${product.name}</a>
+    <a href="javascript:history.back()">< Terug naar overzicht</a>
 </div>
 
 <div class="ms-product-details-container">
