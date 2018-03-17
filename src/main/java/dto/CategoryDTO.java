@@ -1,10 +1,17 @@
 package dto;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CategoryDTO extends ComponentDTO {
 
-    private final List<Integer> productIdList;
+    private List<Integer> productIdList;
+
+    // Only for REST
+    @Deprecated
+    public CategoryDTO() {
+
+    }
 
     public CategoryDTO(int id, String name, String description, String image, List<Integer> productIdList) {
         super(id, name, description, image);
@@ -12,6 +19,9 @@ public class CategoryDTO extends ComponentDTO {
     }
 
     public List<Integer> getProductIdList() {
+        if (productIdList == null) {
+            productIdList = new ArrayList<>();
+        }
         return productIdList;
     }
 

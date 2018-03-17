@@ -28,12 +28,20 @@ public class ComponentServices {
         return categoryManager.getComponent(id);
     }
 
+    public void updateCategory(CategoryDTO categoryDTO) throws ObjectNotFoundException {
+        categoryManager.updateCategory(categoryDTO);
+    }
+
     public void addNewCategory(CategoryDTO categoryDTO) throws ObjectAlreadyExistsException {
         categoryManager.addNewComponent(categoryDTO);
     }
 
     public void deleteCategory(Category category) throws ObjectNotFoundException {
         categoryManager.deleteComponent(category);
+    }
+
+    public List<Category> getProductCategories(int productId) {
+        return categoryManager.getProductCategories(productManager.getComponent(productId));
     }
 
     public List<Product> getAllProducts() {

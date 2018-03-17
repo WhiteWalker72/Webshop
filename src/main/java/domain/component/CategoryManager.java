@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class CategoryManager implements IComponentManager<Category, CategoryDTO> {
 
@@ -57,8 +58,24 @@ public class CategoryManager implements IComponentManager<Category, CategoryDTO>
         return categoryIdMap.get(id);
     }
 
+    public void updateCategory(CategoryDTO categoryDTO) throws ObjectNotFoundException {
+        if (categoryDTO == null) {
+            throw new ObjectNotFoundException("categoryDTO", "updating", "unknown");
+        }
+
+        categoryIdMap.put(categoryDTO.getId(), componentMapper.toDomainObject(categoryDTO));
+        PersistenceServices.getInstance().updateCategory(categoryDTO);
+    }
+
     public List<Category> getAllCategories() {
         return new ArrayList<>(categoryIdMap.values());
+    }
+
+    public List<Category> getProductCategories(Product product) {
+        if (product == null) {
+            return new ArrayList<>();
+        }
+        return getAllCategories().stream().filter(category -> category.getProductList().contains(product)).collect(Collectors.toList());
     }
 
     public void removeProductFromCategory(Product product, Category category) throws ObjectNotFoundException {

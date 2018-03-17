@@ -19,7 +19,7 @@ public class PersistenceServices {
     private IDAOFactory daoFactory;
 
     private PersistenceServices() {
-        
+
     }
 
     public static PersistenceServices getInstance() {
@@ -120,10 +120,6 @@ public class PersistenceServices {
 
     public void setDaoFactory(IDAOFactory daoFactory) {
         this.daoFactory = daoFactory;
-    }
-
-    public static void main(String[] args) {
-        PersistenceServices.getInstance();
     }
 
 }

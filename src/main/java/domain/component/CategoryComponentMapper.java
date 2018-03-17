@@ -16,14 +16,20 @@ class CategoryComponentMapper extends ComponentMapper<Category, CategoryDTO> {
 
     @Override
     public CategoryDTO toDTO(Category domainObject) {
-        return new CategoryDTO(compManager.getId(domainObject), domainObject.getName(), domainObject.getDescription(), domainObject.getImageName(),
+        return new CategoryDTO(domainObject.getId(), domainObject.getName(), domainObject.getDescription(), domainObject.getImageName(),
                 domainObject.getProductList().stream().map(productManager::getId).filter(Objects::nonNull).collect(Collectors.toList()));
     }
 
     @Override
     public Category toDomainObject(CategoryDTO dto) {
-        return new Category(dto.getId(), dto.getName(), dto.getDescription(), dto.getImage(),
-                dto.getProductIdList().stream().map(productManager::getComponent).filter(Objects::nonNull).collect(Collectors.toList()));
+        return new Category(dto.getId()
+                , dto.getName()
+                , dto.getDescription()
+                , dto.getImage(),
+                dto.getProductIdList().stream()
+                        .map(productManager::getComponent)
+                        .filter(Objects::nonNull)
+                        .collect(Collectors.toList()));
     }
 
 }

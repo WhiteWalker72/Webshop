@@ -10,8 +10,7 @@ class ProductComponentMapper extends ComponentMapper<Product, ProductDTO> {
 
     @Override
     public ProductDTO toDTO(Product domainObject) {
-        int id = compManager.getId(domainObject);
-        return new ProductDTO(id, domainObject.getName(), domainObject.getDescription(), domainObject.getImageName()
+        return new ProductDTO(domainObject.getId(), domainObject.getName(), domainObject.getDescription(), domainObject.getImageName()
                 , domainObject.getPrice(), domainObject.getAmountStored());
     }
 
