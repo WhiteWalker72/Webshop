@@ -43,6 +43,10 @@ public class ComponentServices {
         return productManager.getComponent(id);
     }
 
+    public ProductDTO getProductDTO(int id) {
+        return productManager.getComponentDTO(id);
+    }
+
     public void addNewProduct(ProductDTO productDTO) throws ObjectAlreadyExistsException {
         productManager.addNewComponent(productDTO);
     }

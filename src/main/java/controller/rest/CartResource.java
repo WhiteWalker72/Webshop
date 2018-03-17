@@ -1,13 +1,15 @@
 package controller.rest;
 
-import domain.component.Product;
+import controller.request.AddProductToCartRequest;
+import domain.cart.Cart;
+import dto.ProductDTO;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
-import java.util.ArrayList;
+import java.util.Map;
 
 @Path("/cart")
 public class CartResource {
@@ -18,29 +20,26 @@ public class CartResource {
 
     @GET
     @Produces("application/json")
-    public ArrayList<Product> getProducts() {
+    public Map<ProductDTO, Integer> getProducts() {
 
         HttpSession session = request.getSession();
 
-        if (session.getAttribute("cart") != null) {
+        if (session.getAttribute("cart") == null) {
 
-            return (ArrayList<Product>) session.getAttribute("cart");
-        } else {
-
-            ArrayList<Product> cart = new ArrayList<>();
-
-            //TODO: product should be package private, use ComponentServices instead
-            cart.add(new Product("1", "Mandje", 2.0, "1", 5));
-
-            session.setAttribute("cart", cart);
-
-            return cart;
+            session.setAttribute("cart", new Cart());
         }
+
+        return (Map<ProductDTO, Integer>) session.getAttribute("cart");
     }
 
     @DELETE
     @Path("{id}")
     public Response deleteProduct(@PathParam("id") int customerId) {
+
+        if (request.getSession().getAttribute("cart") != null) {
+
+            request.getSession().setAttribute("cart", new Cart());
+        }
 
         return Response.status(Response.Status.OK).build();
     }
@@ -55,20 +54,20 @@ public class CartResource {
 
     @POST
     @Consumes("application/json")
-    public Response addProduct(String customer) {
+    public Response addProduct(AddProductToCartRequest product) {
 
         HttpSession session = request.getSession();
 
         if (session.getAttribute("cart") != null) {
 
-            ArrayList<Product> cart = (ArrayList<Product>) session.getAttribute("cart");
+            Cart cart = (Cart) session.getAttribute("cart");
 
-            cart.add(new Product("1", "Mandje", 2.0, "1", 5));
+            cart.add(product.getId(), product.getAmount());
 
             session.setAttribute("cart", cart);
         } else {
 
-            session.setAttribute("cart", new ArrayList<Product>());
+            session.setAttribute("cart", new Cart());
         }
 
         return Response.status(Response.Status.OK).build();

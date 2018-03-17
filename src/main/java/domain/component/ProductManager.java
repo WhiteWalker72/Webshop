@@ -54,6 +54,13 @@ public class ProductManager implements IComponentManager<Product, ProductDTO> {
         return productIdMap.get(id);
     }
 
+    //TODO: I'm building a web app, I need objects with ID's..
+    public ProductDTO getComponentDTO(int id) {
+        Product p = productIdMap.get(id);
+
+        return componentMapper.toDTO(p);
+    }
+
     public void lowerProductAmount(Product product) throws ObjectNotFoundException, InvalidAmountException {
         if (product == null) {
             throw new ObjectNotFoundException("product", "when lowering amount stored");

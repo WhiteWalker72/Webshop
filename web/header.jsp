@@ -40,12 +40,14 @@
         <h2>Winkelmandje</h2>
 
         <table class="ms-cart-list">
-            <tr data-id="1">
-                <td>Mand</td>
-                <td><input type="text" class="ms-cart-amount" value="1"></td>
-                <td>&euro; 21,99</td>
+            <c:forEach var="product" items="${cart}">
+            <tr data-id="${product.key.id}">
+                <td>${product.key.name}</td>
+                <td><input type="text" class="ms-cart-amount" value="${product.value}"></td>
+                <td>&euro; ${product.key.price}</td>
                 <td class="ms-cart-delete">X</td>
             </tr>
+            </c:forEach>
         </table>
 
         <span class="ms-button">
