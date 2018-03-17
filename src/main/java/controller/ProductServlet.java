@@ -1,5 +1,6 @@
 package controller;
 
+import domain.component.ComponentServices;
 import utils.ServletUtils;
 
 import javax.servlet.ServletException;
@@ -16,7 +17,9 @@ public class ProductServlet extends HttpServlet {
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
-        request.setAttribute("id", ServletUtils.getPathId(request.getPathInfo()));
+        String id = ServletUtils.getPathId(request.getPathInfo());
+
+        request.setAttribute("product", ComponentServices.getInstance().getProductDTO(Integer.parseInt(id)));
         request.getRequestDispatcher("/product/product.jsp").include(request, response);
     }
 
