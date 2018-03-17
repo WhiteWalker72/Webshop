@@ -1,22 +1,35 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="ms-products">
 
-
+    <c:forEach var="product" items="${products}">
     <div class="ms-product">
 
-        <a class="ms-product-info-link" href="/Product/1">
-            <img class="ms-product-thumbnail" src="/images/mand.jpg" alt="Mand">
+        <a class="ms-product-info-link" href="/Product/${product.id}">
+            <img class="ms-product-thumbnail" src="/images/products/${product.image}.jpg" alt="Mand">
 
-            <span class="ms-product-title">Mandje van Tichelaar</span>
+            <span class="ms-product-title">${product.name}</span>
 
             <div class="ms-product-description">
-                Dit unieke mandje van Tichelaar, mandje tichelaar, MAND, is een one of a kind kunstobject.
+                    ${product.description}
             </div>
         </a>
         <div class="ms-product-actions">
             <div class="ms-product-info">
-                <span>&euro; 2199,99</span>
-                <span>Op voorraad</span>
+                <span>&euro; ${product.price}</span>
+
+                <span>
+                <c:choose>
+                    <c:when test="${product.amountStored > 0}">
+                        Op voorraad
+                    </c:when>
+                    <c:otherwise>
+                        Uitverkocht
+                    </c:otherwise>
+                </c:choose>
+                </span>
+
+
             </div>
 
             <div class="ms-product-cart" data-id="1">
@@ -29,6 +42,7 @@
         </div>
 
     </div>
+    </c:forEach>
 
     <div class="ms-clear"></div>
 </div>

@@ -9,7 +9,7 @@
 <div class="ms-product-details-container">
 
 
-        <img class="ms-product-details-image" src="/images/mand.jpg" alt="Mand">
+        <img class="ms-product-details-image" src="/images/products/mand.jpg" alt="Mand">
 
         <div class="ms-product-details">
 
