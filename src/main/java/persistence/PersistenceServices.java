@@ -19,7 +19,7 @@ public class PersistenceServices {
     private IDAOFactory daoFactory;
 
     private PersistenceServices() {
-
+        
     }
 
     public static PersistenceServices getInstance() {
@@ -46,7 +46,7 @@ public class PersistenceServices {
         return daoFactory.getProductDAO().findAll();
     }
 
-    public ProductDTO findProductById(String identifier) throws ObjectNotFoundException {
+    public ProductDTO findProductById(String identifier) {
         return daoFactory.getProductDAO().findById(identifier);
     }
 
@@ -66,7 +66,7 @@ public class PersistenceServices {
         return daoFactory.getCategoryDAO().findAll();
     }
 
-    public CategoryDTO findCategoryById(String identifier) throws ObjectNotFoundException {
+    public CategoryDTO findCategoryById(String identifier) {
         return daoFactory.getCategoryDAO().findById(identifier);
     }
 
@@ -86,7 +86,7 @@ public class PersistenceServices {
         return daoFactory.getOfferDAO().findAll();
     }
 
-    public OfferDTO findOfferById(String identifier) throws ObjectNotFoundException {
+    public OfferDTO findOfferById(String identifier) {
         return daoFactory.getOfferDAO().findById(identifier);
     }
 

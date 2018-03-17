@@ -2,7 +2,7 @@ package controller.rest;
 
 import controller.request.AddProductToCartRequest;
 import domain.cart.Cart;
-import dto.ProductDTO;
+import domain.component.Product;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -14,30 +14,26 @@ import java.util.Map;
 @Path("/cart")
 public class CartResource {
 
-
     @Context
     HttpServletRequest request;
 
     @GET
     @Produces("application/json")
-    public Map<ProductDTO, Integer> getProducts() {
-
+    public Map<Product, Integer> getProducts() {
         HttpSession session = request.getSession();
 
         if (session.getAttribute("cart") == null) {
-
             session.setAttribute("cart", new Cart());
         }
 
-        return (Map<ProductDTO, Integer>) session.getAttribute("cart");
+        Cart cart = (Cart) session.getAttribute("cart");
+        return cart.getProducts();
     }
 
     @DELETE
     @Path("{id}")
     public Response deleteProduct(@PathParam("id") int customerId) {
-
         if (request.getSession().getAttribute("cart") != null) {
-
             request.getSession().setAttribute("cart", new Cart());
         }
 
@@ -48,25 +44,19 @@ public class CartResource {
     @Path("{id}")
     @Consumes("application/json")
     public Response updateProduct(@PathParam("id") int customerId, String customer) {
-
         return Response.status(Response.Status.OK).build();
     }
 
     @POST
     @Consumes("application/json")
     public Response addProduct(AddProductToCartRequest product) {
-
         HttpSession session = request.getSession();
 
         if (session.getAttribute("cart") != null) {
-
             Cart cart = (Cart) session.getAttribute("cart");
-
             cart.add(product.getId(), product.getAmount());
-
             session.setAttribute("cart", cart);
         } else {
-
             session.setAttribute("cart", new Cart());
         }
 
