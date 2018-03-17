@@ -3,7 +3,6 @@ package persistence;
 import dto.ProductDTO;
 import exceptions.ObjectAlreadyExistsException;
 import exceptions.ObjectNotFoundException;
-import utils.SQLUtils;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -18,19 +17,14 @@ public class ProductDAOSQLImpl extends DAOSQLImpl<ProductDTO> {
     @Override
     ProductDTO getObjectFromResultSet(ResultSet resultSet) {
         try {
-            ProductDTO productDTO = new ProductDTO(
+            return new ProductDTO(
                     resultSet.getInt("id")
                     , resultSet.getString("naam")
                     , resultSet.getString("omschrijving")
                     , resultSet.getString("afbeelding")
+                    , resultSet.getInt("prijs")
                     , resultSet.getInt("voorraad"));
 
-            String priceCol = "prijs";
-            if (SQLUtils.hasColumn(resultSet, priceCol)) {
-                productDTO.withPrice(resultSet.getInt(priceCol));
-            }
-
-            return productDTO;
         } catch (SQLException e) {
             e.printStackTrace();
         }

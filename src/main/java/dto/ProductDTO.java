@@ -5,14 +5,16 @@ public class ProductDTO extends ComponentDTO {
     private double price;
     private int amountStored;
 
-    public ProductDTO(int id, String name, String description, String image, int amountStored) {
-        super(id, name, description, image);
-        this.amountStored = amountStored;
+    // Only for REST
+    @Deprecated
+    public ProductDTO() {
+
     }
 
-    public ProductDTO withPrice(double price) {
+    public ProductDTO(int id, String name, String description, String image, double price, int amountStored) {
+        super(id, name, description, image);
         this.price = price;
-        return this;
+        this.amountStored = amountStored;
     }
 
     public double getPrice() {

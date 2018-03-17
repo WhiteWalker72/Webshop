@@ -115,8 +115,7 @@ public class ComponentServiceIntegrationTest {
     private void addTestProduct() {
         try {
             compServices.addNewProduct(new ProductDTO(1, "test product", "JUnit test", "image"
-                    , 1)
-                    .withPrice(5.0));
+                    , 5.0, 1));
         } catch (ObjectAlreadyExistsException e) {
 
         }

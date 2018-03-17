@@ -2,10 +2,16 @@ package dto;
 
 public class ComponentDTO {
 
-    private final int id;
-    private final String name;
-    private final String description;
-    private final String image;
+    private int id;
+    private String name;
+    private String description;
+    private String image;
+
+    // Only for REST
+    @Deprecated
+    public ComponentDTO() {
+
+    }
 
     public ComponentDTO(int id, String name, String description, String image) {
         this.id = id;

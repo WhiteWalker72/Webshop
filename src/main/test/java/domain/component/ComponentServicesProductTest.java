@@ -88,8 +88,7 @@ public class ComponentServicesProductTest {
 
     private void addTestProduct() throws ObjectAlreadyExistsException {
         compServices.addNewProduct(new ProductDTO(1, "test product", "JUnit test", "image"
-                , 1)
-                .withPrice(5.0));
+                , 5.0, 1));
     }
 
     private void deleteTestProduct() throws ObjectNotFoundException {

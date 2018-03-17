@@ -27,8 +27,7 @@ public class OfferServicesTest {
         // An offer needs a product
         try {
             ComponentServices.getInstance().addNewProduct(new ProductDTO(1, "test product", "JUnit test", "image"
-                    , 1)
-                    .withPrice(5.0));
+                    , 5.0, 1));
         } catch (ObjectAlreadyExistsException e) {
             e.printStackTrace();
         }

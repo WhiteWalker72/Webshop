@@ -44,6 +44,10 @@ public class ComponentServices {
         return productManager.getComponent(id);
     }
 
+    public void updateProduct(ProductDTO productDTO) throws ObjectNotFoundException {
+        productManager.updateProduct(productDTO);
+    }
+
     public void addNewProduct(ProductDTO productDTO) throws ObjectAlreadyExistsException {
         productManager.addNewComponent(productDTO);
     }

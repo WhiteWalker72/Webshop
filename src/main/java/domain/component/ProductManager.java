@@ -56,11 +56,13 @@ public class ProductManager implements IComponentManager<Product, ProductDTO> {
         return productIdMap.get(id);
     }
 
-    //TODO: I'm building a web app, I need objects with ID's..
-    public ProductDTO getComponentDTO(int id) {
-        Product p = productIdMap.get(id);
+    public void updateProduct(ProductDTO productDTO) throws ObjectNotFoundException {
+        if (productDTO == null) {
+            throw new ObjectNotFoundException("productDTO", "updating", "unknown");
+        }
 
-        return componentMapper.toDTO(p);
+        productIdMap.put(productDTO.getId(), componentMapper.toDomainObject(productDTO));
+        PersistenceServices.getInstance().updateProduct(productDTO);
     }
 
     public List<Product> getAllProducts() {
