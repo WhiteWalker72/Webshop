@@ -24,6 +24,14 @@ public class Cart {
         }
     }
 
+    public void edit(Integer productId, Integer amount) {
+        Map.Entry<Product, Integer> prodEntry = getProductAmountById(productId);
+
+        if (prodEntry != null) {
+            cart.put(prodEntry.getKey(), amount);
+        }
+    }
+
     public void remove(Integer productId) {
         for (Map.Entry<Product, Integer> entry : cart.entrySet()) {
             if (entry.getKey().getId() == productId) {

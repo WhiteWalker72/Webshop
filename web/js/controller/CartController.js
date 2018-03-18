@@ -7,6 +7,13 @@ class CartController {
             this.addToCart(event)
         });
 
+        var amountField = document.querySelector(".ms-cart-amount");
+
+        amountField && amountField.addEventListener("change", (event) => {
+
+            this.editCart(event)
+        });
+
         var deleteButton = document.querySelector(".ms-cart-delete");
 
         deleteButton && deleteButton.addEventListener("click", (event) => {
@@ -33,6 +40,19 @@ class CartController {
         var result = request('/api/cart', 'POST', {
             "id": event.target.parentElement.dataset.id,
             "amount": event.target.parentElement.querySelector('.ms-product-cart-amount').value
+        });
+
+        if(result) {
+
+            alert('Product toegevoegd aan mand');
+        }
+    }
+
+    editCart(event) {
+
+        var result = request('/api/cart', 'PUT', {
+            "id": event.target.parentElement.parentElement.dataset.id,
+            "amount": event.target.value
         });
 
         if(result) {

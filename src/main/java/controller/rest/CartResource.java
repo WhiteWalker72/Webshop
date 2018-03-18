@@ -32,35 +32,45 @@ public class CartResource {
 
     @DELETE
     @Path("{id}")
-    public Response deleteProduct(@PathParam("id") int customerId) {
-        if (request.getSession().getAttribute("cart") != null) {
-            request.getSession().setAttribute("cart", new Cart());
-        }
+    public Response deleteProduct(@PathParam("id") int productId) {
+
+        this.getCart().remove(productId);
 
         return Response.status(Response.Status.OK).build();
     }
 
     @PUT
-    @Path("{id}")
     @Consumes("application/json")
-    public Response updateProduct(@PathParam("id") int customerId, String customer) {
+    public Response updateProduct(AddProductToCartRequest product) {
+
+        this.getCart().edit(product.getId(), product.getAmount());
+
         return Response.status(Response.Status.OK).build();
     }
 
     @POST
     @Consumes("application/json")
     public Response addProduct(AddProductToCartRequest product) {
-        HttpSession session = request.getSession();
 
-        if (session.getAttribute("cart") != null) {
-            Cart cart = (Cart) session.getAttribute("cart");
-            cart.add(product.getId(), product.getAmount());
-            session.setAttribute("cart", cart);
-        } else {
-            session.setAttribute("cart", new Cart());
-        }
+        this.getCart().add(product.getId(), product.getAmount());
 
         return Response.status(Response.Status.OK).build();
+    }
+
+    private Cart getCart() {
+
+        HttpSession session = request.getSession();
+
+        Cart cart;
+
+        if (session.getAttribute("cart") != null)
+            cart = (Cart) session.getAttribute("cart");
+         else
+            cart = new Cart();
+
+        session.setAttribute("cart", cart);
+
+        return cart;
     }
 
 }
