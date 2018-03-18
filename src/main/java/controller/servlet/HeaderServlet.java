@@ -1,4 +1,4 @@
-package controller;
+package controller.servlet;
 
 import domain.cart.Cart;
 import domain.component.ComponentServices;

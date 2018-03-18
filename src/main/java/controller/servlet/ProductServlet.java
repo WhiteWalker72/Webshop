@@ -1,4 +1,4 @@
-package controller;
+package controller.servlet;
 
 import domain.component.ComponentServices;
 import utils.ServletUtils;
