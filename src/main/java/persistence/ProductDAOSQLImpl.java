@@ -22,7 +22,7 @@ public class ProductDAOSQLImpl extends DAOSQLImpl<ProductDTO> {
                     , resultSet.getString("naam")
                     , resultSet.getString("omschrijving")
                     , resultSet.getString("afbeelding")
-                    , resultSet.getInt("prijs")
+                    , resultSet.getDouble("prijs")
                     , resultSet.getInt("voorraad"));
 
         } catch (SQLException e) {
