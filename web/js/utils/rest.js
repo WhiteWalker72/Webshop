@@ -1,4 +1,4 @@
-function request(url, type, data) {
+function request(url, type, data, callback) {
 
     var xhr = new XMLHttpRequest();
     xhr.open(type, url, true);
@@ -9,7 +9,7 @@ function request(url, type, data) {
     xhr.onload = function() {
 
         try {
-            return JSON.parse(xhr.responseText);
+            callback(JSON.parse(xhr.responseText));
         } catch(error) {
             console.error('Response is not JSON');
         }

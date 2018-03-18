@@ -37,15 +37,23 @@ class CartController {
 
     addToCart(event) {
 
+        var amount = event.target.parentElement.querySelector('.ms-product-cart-amount').value;
+
         var result = request('/api/cart', 'POST', {
             "id": event.target.parentElement.dataset.id,
-            "amount": event.target.parentElement.querySelector('.ms-product-cart-amount').value
+            "amount": amount
+        }, function (data) {
+
+            var template = `
+            <tr data-id="${data.id}">
+                <td>${data.name}</td>
+                <td><input type="text" class="ms-cart-amount" value="${amount}"></td>
+                <td>&euro; ${data.price}</td>
+                <td class="ms-cart-delete">X</td>
+            </tr>`;
+
+            document.querySelector(".ms-cart-list").insertAdjacentHTML('beforeend', template);
         });
-
-        if(result) {
-
-            alert('Product toegevoegd aan mand');
-        }
     }
 
     editCart(event) {
@@ -54,15 +62,12 @@ class CartController {
             "id": event.target.parentElement.parentElement.dataset.id,
             "amount": event.target.value
         });
-
-        if(result) {
-
-            alert('Product toegevoegd aan mand');
-        }
     }
 
     removeFromCart(event) {
 
         var result = request('/api/cart/' + event.target.parentElement.dataset.id, 'DELETE');
+
+        event.target.parentElement.parentElement.removeChild(event.target.parentElement);
     }
 }

@@ -2,6 +2,7 @@ package controller.rest;
 
 import controller.request.AddProductToCartRequest;
 import domain.cart.Cart;
+import domain.component.ComponentServices;
 import domain.component.Product;
 
 import javax.servlet.http.HttpServletRequest;
@@ -50,11 +51,12 @@ public class CartResource {
 
     @POST
     @Consumes("application/json")
-    public Response addProduct(AddProductToCartRequest product) {
+    @Produces("application/json")
+    public Product addProduct(AddProductToCartRequest product) {
 
         this.getCart().add(product.getId(), product.getAmount());
 
-        return Response.status(Response.Status.OK).build();
+        return ComponentServices.getInstance().getProduct(product.getId());
     }
 
     private Cart getCart() {
