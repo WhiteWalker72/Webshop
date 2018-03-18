@@ -7,6 +7,13 @@ class CartController {
             this.addToCart(event)
         });
 
+        var amountField = document.querySelector(".ms-cart-amount");
+
+        amountField && amountField.addEventListener("change", (event) => {
+
+            this.editCart(event)
+        });
+
         var deleteButton = document.querySelector(".ms-cart-delete");
 
         deleteButton && deleteButton.addEventListener("click", (event) => {
@@ -30,19 +37,37 @@ class CartController {
 
     addToCart(event) {
 
+        var amount = event.target.parentElement.querySelector('.ms-product-cart-amount').value;
+
         var result = request('/api/cart', 'POST', {
             "id": event.target.parentElement.dataset.id,
-            "amount": event.target.parentElement.querySelector('.ms-product-cart-amount').value
+            "amount": amount
+        }, function (data) {
+
+            var template = `
+            <tr data-id="${data.id}">
+                <td>${data.name}</td>
+                <td><input type="text" class="ms-cart-amount" value="${amount}"></td>
+                <td>&euro; ${data.price}</td>
+                <td class="ms-cart-delete">X</td>
+            </tr>`;
+
+            document.querySelector(".ms-cart-list").insertAdjacentHTML('beforeend', template);
         });
+    }
 
-        if(result) {
+    editCart(event) {
 
-            alert('Product toegevoegd aan mand');
-        }
+        var result = request('/api/cart', 'PUT', {
+            "id": event.target.parentElement.parentElement.dataset.id,
+            "amount": event.target.value
+        });
     }
 
     removeFromCart(event) {
 
         var result = request('/api/cart/' + event.target.parentElement.dataset.id, 'DELETE');
+
+        event.target.parentElement.parentElement.removeChild(event.target.parentElement);
     }
 }

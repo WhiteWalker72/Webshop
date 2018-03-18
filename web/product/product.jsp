@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 
 <jsp:include page="/header">
     <jsp:param value="Product - ${product.getId()}" name="title"/>
@@ -24,7 +25,7 @@
 
         <div class="ms-product-actions">
             <div class="ms-product-info">
-                <span>&euro; ${product.getPrice()}</span>
+                <span><fmt:formatNumber currencySymbol="&euro; " value="${product.getPrice()}" type="currency"/></span>
                 <span>
                     <c:choose>
                         <c:when test="${product.getAmountStored() > 0}">
