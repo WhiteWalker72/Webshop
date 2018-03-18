@@ -52,9 +52,9 @@
 
         <div class="ms-total-price">Totaal: &euro; <span></span></div>
 
-        <span class="ms-button ms-checkout-button">
+        <a class="ms-button ms-checkout-button" href="/checkout/customerdata">
             Afrekenen
-        </span>
+        </a>
     </div>
 </div>
 
