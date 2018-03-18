@@ -52,7 +52,13 @@ class CartController {
                 <td class="ms-cart-delete">X</td>
             </tr>`;
 
-            document.querySelector(".ms-cart-list").insertAdjacentHTML('beforeend', template);
+            var product = document.querySelector(`.ms-cart-list tr[data-id='${data.id}']`);
+
+            if(product == null)
+                document.querySelector(".ms-cart-list").insertAdjacentHTML('beforeend', template);
+             else
+                 product.querySelector('.ms-cart-amount').value = +product.querySelector('.ms-cart-amount').value + +amount;
+
         });
     }
 
