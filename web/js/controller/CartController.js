@@ -1,24 +1,41 @@
 class CartController {
 
     constructor() {
+        this.calculateTotal();
 
-        document.querySelector(".ms-product-cart-button").addEventListener("click", (event) => {
+        var cartButton = document.querySelectorAll(".ms-product-cart-button");
 
-            this.addToCart(event)
+        var _self = this;
+
+        cartButton.forEach(function(button) {
+
+            button.addEventListener("click", (event) => {
+
+                _self.addToCart(event);
+            });
+
         });
 
-        var amountField = document.querySelector(".ms-cart-amount");
+        var amountField = document.querySelectorAll(".ms-cart-amount");
 
-        amountField && amountField.addEventListener("change", (event) => {
+        amountField.forEach(function(button) {
 
-            this.editCart(event)
+            button.addEventListener("change", (event) => {
+
+                _self.editCart(event);
+            });
+
         });
 
-        var deleteButton = document.querySelector(".ms-cart-delete");
+        var deleteButton = document.querySelectorAll(".ms-cart-delete");
 
-        deleteButton && deleteButton.addEventListener("click", (event) => {
+        deleteButton.forEach(function(button) {
 
-            this.removeFromCart(event)
+            button.addEventListener("click", (event) => {
+
+                _self.removeFromCart(event);
+            });
+
         });
 
         document.querySelector(".ms-menu-cart").addEventListener("click", function() {
@@ -39,27 +56,29 @@ class CartController {
 
         var amount = event.target.parentElement.querySelector('.ms-product-cart-amount').value;
 
-        var result = request('/api/cart', 'POST', {
+        request('/api/cart', 'POST', {
             "id": event.target.parentElement.dataset.id,
             "amount": amount
-        }, function (data) {
+        }, function (data, self) {
 
             var template = `
             <tr data-id="${data.id}">
                 <td>${data.name}</td>
                 <td><input type="text" class="ms-cart-amount" value="${amount}"></td>
-                <td>&euro; ${data.price}</td>
+                <td>&euro; <span class="ms-cart-price">${data.price}</span></td>
                 <td class="ms-cart-delete">X</td>
             </tr>`;
 
             var product = document.querySelector(`.ms-cart-list tr[data-id='${data.id}']`);
 
             if(product == null)
-                document.querySelector(".ms-cart-list").insertAdjacentHTML('beforeend', template);
+                document.querySelector(".ms-cart-list tbody").insertAdjacentHTML('beforeend', template);
              else
                  product.querySelector('.ms-cart-amount').value = +product.querySelector('.ms-cart-amount').value + +amount;
 
         });
+
+        this.calculateTotal();
     }
 
     editCart(event) {
@@ -68,6 +87,8 @@ class CartController {
             "id": event.target.parentElement.parentElement.dataset.id,
             "amount": event.target.value
         });
+
+        this.calculateTotal();
     }
 
     removeFromCart(event) {
@@ -75,5 +96,22 @@ class CartController {
         var result = request('/api/cart/' + event.target.parentElement.dataset.id, 'DELETE');
 
         event.target.parentElement.parentElement.removeChild(event.target.parentElement);
+
+        this.calculateTotal();
+    }
+
+    calculateTotal() {
+
+        var products = document.querySelectorAll(".ms-cart-list tr");
+
+        var price = 0;
+
+        products.forEach(function(product) {
+
+            price += +product.querySelector('.ms-cart-price').innerHTML
+                        * +product.querySelector('.ms-cart-amount').value;
+        });
+
+        document.querySelector('.ms-cart .ms-total-price span').innerHTML = price.toFixed(2);
     }
 }

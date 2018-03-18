@@ -34,7 +34,7 @@
 
                 </div>
 
-                <div class="ms-product-cart" data-id="1">
+                <div class="ms-product-cart" data-id="${product.getId()}">
                     <input type="text" class="ms-product-cart-amount" value="1">
                     <span class="ms-button ms-product-cart-button">+ Mand</span>
                 </div>

@@ -310,6 +310,12 @@ h1 {
     outline: none;
 }
 
+.ms-cart .ms-total-price {
+
+    display: block;
+    margin-bottom: 10px;
+}
+
 .ms-product-details-container {
 
     padding: 12px 17px;

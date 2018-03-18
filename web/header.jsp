@@ -44,13 +44,15 @@
             <tr data-id="${product.key.id}">
                 <td>${product.key.name}</td>
                 <td><input type="text" class="ms-cart-amount" value="${product.value}"></td>
-                <td>&euro; ${product.key.price}</td>
+                <td>&euro; <span class="ms-cart-price">${product.key.price}</span></td>
                 <td class="ms-cart-delete">X</td>
             </tr>
             </c:forEach>
         </table>
 
-        <span class="ms-button">
+        <div class="ms-total-price">Totaal: &euro; <span></span></div>
+
+        <span class="ms-button ms-checkout-button">
             Afrekenen
         </span>
     </div>

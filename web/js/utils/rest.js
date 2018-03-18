@@ -11,7 +11,7 @@ function request(url, type, data, callback) {
         try {
             callback(JSON.parse(xhr.responseText));
         } catch(error) {
-            console.error('Response is not JSON');
+            //console.error('Response is not JSON');
         }
 
     };
