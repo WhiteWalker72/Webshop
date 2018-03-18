@@ -1,5 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
+
 <div class="ms-products">
 
     <c:forEach var="product" items="${products}">
@@ -16,7 +18,7 @@
             </a>
             <div class="ms-product-actions">
                 <div class="ms-product-info">
-                    <span>&euro; ${product.getPrice()}</span>
+                    <span><fmt:formatNumber currencySymbol="&euro; " value="${product.getPrice()}" type="currency"/></span>
 
                     <span>
                 <c:choose>
