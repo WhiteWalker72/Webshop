@@ -32,7 +32,7 @@ public class AddressDAOTest {
 
     @Test
     void addAndDeleteAddressTest() {
-        // There should not a an address already
+        // There should not be an address already
         assertEquals(null, perServices.findAddressById(1 + ""));
 
         try {
@@ -91,12 +91,6 @@ public class AddressDAOTest {
         // Get the address and make sure its not null
         AddressDTO addressDTO = perServices.findAddressById("1");
         assertNotEquals(null, addressDTO);
-
-        String oldStreet = addressDTO.getStreet();
-        int oldNumber = addressDTO.getNumber();
-        String oldPostal = addressDTO.getPostalCode();
-        String oldCity = addressDTO.getCity();
-        String oldCountry = addressDTO.getCountry();
 
         String newStreet = "newStreet";
         int newNumber = 99;
