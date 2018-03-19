@@ -1,5 +1,6 @@
 package persistence;
 
+import domain.account.Account;
 import dto.*;
 
 public class DAOSQLFactory implements IDAOFactory {
@@ -9,6 +10,7 @@ public class DAOSQLFactory implements IDAOFactory {
     private final DAO<OfferDTO> offerDAO;
     private final DAO<AddressDTO> addressDAO;
     private final DAO<OrderDTO> orderDAO;
+    private final DAO<Account> accountDAO;
 
     DAOSQLFactory(SQLDatabase database) {
         productDAO = new ProductDAOSQLImpl(database);
@@ -16,6 +18,7 @@ public class DAOSQLFactory implements IDAOFactory {
         offerDAO = new OfferDAOSQLImpl(database);
         addressDAO = new AddressDAOSQLImpl(database);
         orderDAO = new OrderDAOSQLImpl(database);
+        accountDAO = new AccountDAOSQLImpl(database);
     }
 
     @Override
@@ -43,4 +46,8 @@ public class DAOSQLFactory implements IDAOFactory {
         return orderDAO;
     }
 
+    @Override
+    public DAO<Account> getAccountDAO() {
+        return accountDAO;
+    }
 }

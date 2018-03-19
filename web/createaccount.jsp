@@ -77,29 +77,29 @@
     }</style>
 </head>
 <body>
-<form method="post", action="login" style="border:1px solid #F9F9F9">
+<form method="post", action="/Account" style="border:1px solid #F9F9F9">
     <div class="container">
 
         <label for="naam"><b>Voor en achternaam</b></label>
-        <input type="text" placeholder="Voer uw naam in" name="naam" required>
+        <input type="text" placeholder="Voer uw naam in" name="name" required>
 
         <label for="email"><b>Email</b></label>
         <input type="text" placeholder="Enter Email" name="email" required>
 
         <label for="straat"><b>Straat</b></label>
-        <input type="text" placeholder="Straatnaam" name="straat" required>
+        <input type="text" placeholder="Straatnaam" name="street" required>
 
         <label for="huisnummer"><b>Huisnummer</b></label>
-        <input type="text" placeholder="Huisnummer" name="huisnummer" required>
+        <input type="text" placeholder="Huisnummer" name="number" required>
 
         <label for="Postcode"><b>Postcode</b></label>
-        <input type="text" placeholder="Postcode" name="postcode" required>
+        <input type="text" placeholder="Postcode" name="postalcode" required>
 
         <label for="plaatsnaam"><b>Plaatsnaam</b></label>
-        <input type="text" placeholder="Plaatsnaam" name="plaatsnaam" required>
+        <input type="text" placeholder="Plaatsnaam" name="city" required>
 
         <label for="inlognaam"><b>Inlognaam</b></label>
-        <input type="text" placeholder="Kies een inlognaam" name="inlognaam" required>
+        <input type="text" placeholder="Kies een inlognaam" name="username" required>
 
         <label for="psw"><b>Wachtwoord</b></label>
         <input type="password" placeholder="Kies een wachtwoord" name="psw" required>
