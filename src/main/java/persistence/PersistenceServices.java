@@ -1,5 +1,6 @@
 package persistence;
 
+import domain.account.Account;
 import dto.*;
 import exceptions.ObjectAlreadyExistsException;
 import exceptions.ObjectNotFoundException;
@@ -135,4 +136,7 @@ public class PersistenceServices {
         this.daoFactory = daoFactory;
     }
 
+    public void insertAccount(Account account) throws ObjectAlreadyExistsException {
+        daoFactory.getAccountDAO().insert(account);
+    }
 }

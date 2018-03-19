@@ -1,8 +1,9 @@
-/* package controller.servlet;
+/* package persistence;
 
 import java.sql.*;
 
 public class Validate {
+    MySQLDatabase mySQLDatabase = new MySQLDatabase();
 
     public static boolean checkUser(String username, String pass) {
         boolean st = false;
@@ -12,7 +13,7 @@ public class Validate {
             Class.forName("com.mysql.cj.jdbc.Driver");
 
             //creating connection with the database
-            //Connection con = ;
+            Connection con = DriverManager.getConnection();
 
             PreparedStatement ps = con.prepareStatement
                     ("select * from account where InlogNaam=? and pass=?");
