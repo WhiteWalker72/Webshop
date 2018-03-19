@@ -48,6 +48,11 @@ public class ComponentServices {
         return productManager.getAllProducts();
     }
 
+    public List<Product> getAllProductsByCategory(int categoryId) {
+        return categoryManager.getProductsByCategory(categoryId);
+    }
+
+
     public Product getProduct(int id) {
         return productManager.getComponent(id);
     }

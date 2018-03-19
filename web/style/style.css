@@ -130,12 +130,12 @@ h1 {
 
 .ms-categories {
 
-	background-color: #447aa7;
-
-	width: 150px;
-	margin-left: 3px;
-
-	box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+    width: 150px;
+    position: absolute;
+    left: 50px;
+    padding: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .ms-categories ul {
@@ -154,10 +154,8 @@ h1 {
 	display: block;
 }
 
-.ms-categories ul li a {
-
-	background-color: #447aa7;
-	color: #ffffff;
+.ms-categories ul li a:hover {
+    color: #48a6f2;
 }
 
 .ms-content {

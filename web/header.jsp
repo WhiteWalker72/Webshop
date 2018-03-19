@@ -28,7 +28,7 @@
     <div class="ms-categories">
         <ul>
             <c:forEach var="category" items="${categories}">
-                <li><a href="#">${category.name}</a></li>
+                <li><a href="/Category/${category.id}">${category.name}</a></li>
             </c:forEach>
         </ul>
     </div>

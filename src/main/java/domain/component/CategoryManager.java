@@ -100,4 +100,13 @@ public class CategoryManager implements IComponentManager<Category, CategoryDTO>
         }
     }
 
+    public List<Product> getProductsByCategory(int id) {
+        Category category = categoryIdMap.get(id);
+
+        if(category == null) {
+            return new ArrayList<>();
+        }
+
+        return category.getProductList().stream().filter(comp -> comp instanceof Product).map(product -> (Product) product).collect(Collectors.toList());
+    }
 }
