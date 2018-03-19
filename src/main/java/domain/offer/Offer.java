@@ -1,7 +1,5 @@
 package domain.offer;
 
-import domain.component.ComponentServices;
-import domain.component.Product;
 import dto.OfferDTO;
 
 import java.util.Date;
@@ -29,9 +27,6 @@ public class Offer {
     }
 
     public boolean isActive() {
-        if (getProduct() == null) {
-            return false;
-        }
         Date currentDate = new Date();
         return currentDate.after(startDate) && currentDate.before(endDate);
     }
@@ -44,11 +39,7 @@ public class Offer {
         return offerPrice;
     }
 
-    public Product getProduct() {
-        return ComponentServices.getInstance().getProduct(productId);
-    }
-
-    int getProductId() {
+    public int getProductId() {
         return productId;
     }
 

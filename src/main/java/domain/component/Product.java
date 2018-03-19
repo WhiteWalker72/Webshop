@@ -1,11 +1,13 @@
 package domain.component;
 
+import domain.offer.Offer;
 import exceptions.InvalidAmountException;
 
 public class Product extends ShopComponent {
 
     private final double price;
     private int amountStored;
+    private Offer activeOffer;
 
     public Product(int id, String name, String description, double price, String imageName, int amountStored) {
         super(id, name, description, imageName);
@@ -26,6 +28,17 @@ public class Product extends ShopComponent {
             throw new InvalidAmountException("Product amount can't be lower than 0.");
         }
         amountStored -= 1;
+    }
+
+    public Offer getActiveOffer() {
+        if (activeOffer != null && !activeOffer.isActive()) {
+            activeOffer = null;
+        }
+        return activeOffer;
+    }
+
+    public void setActiveOffer(Offer activeOffer) {
+        this.activeOffer = activeOffer;
     }
 
 }

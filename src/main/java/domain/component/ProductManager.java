@@ -1,11 +1,14 @@
 package domain.component;
 
+import domain.offer.Offer;
+import domain.offer.OfferServices;
 import dto.ProductDTO;
 import exceptions.InvalidAmountException;
 import exceptions.ObjectAlreadyExistsException;
 import exceptions.ObjectNotFoundException;
 import persistence.PersistenceServices;
 
+import java.io.InvalidObjectException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -17,8 +20,19 @@ public class ProductManager implements IComponentManager<Product, ProductDTO> {
     private final ComponentMapper<Product, ProductDTO> componentMapper = new ProductComponentMapper(this);
 
     ProductManager() {
-        PersistenceServices.getInstance().findAllProducts()
-                .forEach(dto -> productIdMap.put(dto.getId(), componentMapper.toDomainObject(dto)));
+        PersistenceServices.getInstance().findAllProducts().forEach(dto -> {
+            productIdMap.put(dto.getId(), componentMapper.toDomainObject(dto));
+        });
+
+        // Load and set all active offers
+        OfferServices.getInstance().getActiveOffers().forEach(offer -> {
+            for (Product product : productIdMap.values()) {
+                if (product.getId() == offer.getProductId()) {
+                    product.setActiveOffer(offer);
+                    break;
+                }
+            }
+        });
     }
 
     @Override
@@ -63,6 +77,22 @@ public class ProductManager implements IComponentManager<Product, ProductDTO> {
 
         productIdMap.put(productDTO.getId(), componentMapper.toDomainObject(productDTO));
         PersistenceServices.getInstance().updateProduct(productDTO);
+    }
+
+    public void setProductOffer(Product product, Offer offer) throws ObjectNotFoundException, InvalidObjectException {
+        if (product == null) {
+            throw new ObjectNotFoundException("product", "setting product offer");
+        }
+        if (offer == null) {
+            throw new ObjectNotFoundException("offer", "setting product offer");
+        }
+        if (!offer.isActive()) {
+            throw new InvalidObjectException("Offer with id " + offer.getOfferId() + " isn't active");
+        }
+        if (offer.getProductId() != product.getId()) {
+            throw new InvalidObjectException("Offer with id " + offer.getOfferId() + " isn't a deal for product with id " + product.getId());
+        }
+        product.setActiveOffer(offer);
     }
 
     public List<Product> getAllProducts() {

@@ -1,11 +1,13 @@
 package domain.component;
 
+import domain.offer.Offer;
 import dto.CategoryDTO;
 import dto.ProductDTO;
 import exceptions.InvalidAmountException;
 import exceptions.ObjectAlreadyExistsException;
 import exceptions.ObjectNotFoundException;
 
+import java.io.InvalidObjectException;
 import java.util.List;
 
 public class ComponentServices {
@@ -52,7 +54,6 @@ public class ComponentServices {
         return categoryManager.getProductsByCategory(categoryId);
     }
 
-
     public Product getProduct(int id) {
         return productManager.getComponent(id);
     }
@@ -79,6 +80,10 @@ public class ComponentServices {
 
     public void addProductToCategory(Product product, Category category) throws ObjectNotFoundException {
         categoryManager.addProductToCategory(product, category);
+    }
+
+    public void setProductOffer(Product product, Offer offer) throws InvalidObjectException, ObjectNotFoundException {
+        productManager.setProductOffer(product, offer);
     }
 
     public static ComponentServices getInstance() {

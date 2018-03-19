@@ -19,7 +19,7 @@ public class PersistenceServices {
     private IDAOFactory daoFactory;
 
     private PersistenceServices() {
-
+        setDaoFactory(new DAOSQLFactory(new ConnectionDetails().getSqlDatabase()));
     }
 
     public static PersistenceServices getInstance() {
