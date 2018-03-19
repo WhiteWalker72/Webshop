@@ -75,14 +75,14 @@
 <body>
 <h1>Welkom terug</h1>
 
-<form action="#">
+<form method="post" action="controller.servlet.LoginServlet">
 
     <div class="container">
-        <label for="uname"><b>Gebruikersnaam</b></label>
-        <input type="text" placeholder="Voer gebruikersnaam in" name="uname" required>
+        <label for="username"><b>Gebruikersnaam</b></label>
+        <input type="text" placeholder="Voer gebruikersnaam in" name="username" required>
 
-        <label for="psw"><b>Wachtwoord</b></label>
-        <input type="password" placeholder="Voer wachtwoord in" name="psw" required>
+        <label for="pass"><b>Wachtwoord</b></label>
+        <input type="password" placeholder="Voer wachtwoord in" name="pass" required>
 
         <button type="submit">Login</button>
         <button type="button" class="cancelbtn">Cancel</button>
