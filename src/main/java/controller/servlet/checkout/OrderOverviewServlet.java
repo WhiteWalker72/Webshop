@@ -1,4 +1,6 @@
-package controller;
+package controller.servlet.checkout;
+
+import domain.cart.Cart;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,7 +14,16 @@ public class OrderOverviewServlet extends HttpServlet {
 
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        request.getRequestDispatcher("/checkout/orderoverview.jsp").include(request, response);
+
+        if(request.getSession().getAttribute("cart") == null) {
+
+            response.sendRedirect("/");
+        } else {
+
+            request.setAttribute("cart", ((Cart)request.getSession().getAttribute("cart")).getProducts());
+            request.getRequestDispatcher("/checkout/orderoverview.jsp").include(request, response);
+        }
+
     }
 
 }

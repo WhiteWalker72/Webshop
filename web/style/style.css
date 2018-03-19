@@ -373,3 +373,31 @@ h1 {
 
     color: #000000;
 }
+
+.ms-checkout-products-list {
+
+    width: 100%;
+}
+
+.ms-checkout-products-list td {
+
+    text-align: right;
+}
+
+.ms-checkout-products-list td:first-child {
+
+    text-align: left;
+}
+.ms-checkout-products-list .ms-cart-amount {
+
+    width: 20px;
+    text-align: center;
+
+    outline: none;
+}
+
+.ms-checkout-products-list .ms-total-price {
+
+    display: block;
+    margin-bottom: 10px;
+}
