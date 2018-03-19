@@ -77,7 +77,7 @@
     }</style>
 </head>
 <body>
-<form action="#" style="border:1px solid #F9F9F9">
+<form method="post", action="login" style="border:1px solid #F9F9F9">
     <div class="container">
 
         <label for="naam"><b>Voor en achternaam</b></label>
