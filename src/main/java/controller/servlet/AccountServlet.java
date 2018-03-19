@@ -11,7 +11,6 @@ import domain.account.PassHashingStrategyImpl;
 
 import domain.account.Account;
 import exceptions.ObjectAlreadyExistsException;
-import persistence.AccountDAOSQLImpl;
 import persistence.PersistenceServices;
 import utils.Pair;
 

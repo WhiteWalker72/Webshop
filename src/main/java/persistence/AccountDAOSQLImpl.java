@@ -12,7 +12,7 @@ import java.sql.Types;
 public class AccountDAOSQLImpl extends DAOSQLImpl<Account> {
 
     AccountDAOSQLImpl(SQLDatabase database) {
-        super(database, "account", "id");
+        super(database, "account", "gebruikersnaam");
     }
 
     @Override
@@ -54,7 +54,7 @@ public class AccountDAOSQLImpl extends DAOSQLImpl<Account> {
     }
 
     @Override
-    public void update(Account dto) throws ObjectNotFoundException {
+    public void update(Account dto) {
 
     }
 }
