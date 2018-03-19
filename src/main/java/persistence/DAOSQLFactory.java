@@ -1,9 +1,6 @@
 package persistence;
 
-import dto.AddressDTO;
-import dto.CategoryDTO;
-import dto.OfferDTO;
-import dto.ProductDTO;
+import dto.*;
 
 public class DAOSQLFactory implements IDAOFactory {
 
@@ -11,12 +8,14 @@ public class DAOSQLFactory implements IDAOFactory {
     private final DAO<CategoryDTO> categoryDAO;
     private final DAO<OfferDTO> offerDAO;
     private final DAO<AddressDTO> addressDAO;
+    private final DAO<OrderDTO> orderDAO;
 
-    public DAOSQLFactory(SQLDatabase database) {
+    DAOSQLFactory(SQLDatabase database) {
         productDAO = new ProductDAOSQLImpl(database);
         categoryDAO = new CategoryDAOSQLImpl(database);
         offerDAO = new OfferDAOSQLImpl(database);
         addressDAO = new AddressDAOSQLImpl(database);
+        orderDAO = new OrderDAOSQLImpl(database);
     }
 
     @Override
@@ -37,6 +36,11 @@ public class DAOSQLFactory implements IDAOFactory {
     @Override
     public DAO<AddressDTO> getAddressDAO() {
         return addressDAO;
+    }
+
+    @Override
+    public DAO<OrderDTO> getOrderDAO() {
+        return orderDAO;
     }
 
 }

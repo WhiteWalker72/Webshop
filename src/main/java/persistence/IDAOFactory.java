@@ -1,9 +1,6 @@
 package persistence;
 
-import dto.AddressDTO;
-import dto.CategoryDTO;
-import dto.OfferDTO;
-import dto.ProductDTO;
+import dto.*;
 
 public interface IDAOFactory {
 
@@ -14,5 +11,7 @@ public interface IDAOFactory {
     DAO<OfferDTO> getOfferDAO();
 
     DAO<AddressDTO> getAddressDAO();
+
+    DAO<OrderDTO> getOrderDAO();
 
 }

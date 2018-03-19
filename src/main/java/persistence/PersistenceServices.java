@@ -1,9 +1,6 @@
 package persistence;
 
-import dto.AddressDTO;
-import dto.CategoryDTO;
-import dto.OfferDTO;
-import dto.ProductDTO;
+import dto.*;
 import exceptions.ObjectAlreadyExistsException;
 import exceptions.ObjectNotFoundException;
 
@@ -19,7 +16,7 @@ public class PersistenceServices {
     private IDAOFactory daoFactory;
 
     private PersistenceServices() {
-        setDaoFactory(new DAOSQLFactory(new ConnectionDetails().getSqlDatabase()));
+        
     }
 
     public static PersistenceServices getInstance() {
@@ -116,6 +113,22 @@ public class PersistenceServices {
 
     public void deleteAddress(String identifier) throws ObjectNotFoundException {
         daoFactory.getAddressDAO().delete(identifier);
+    }
+
+    public OrderDTO findOrderById(String identifier) {
+        return daoFactory.getOrderDAO().findById(identifier);
+    }
+
+    public List<OrderDTO> getAllOrders() {
+        return daoFactory.getOrderDAO().findAll();
+    }
+
+    public void insertOrder(OrderDTO orderDTO) throws ObjectAlreadyExistsException {
+        daoFactory.getOrderDAO().insert(orderDTO);
+    }
+
+    public void deleteOrder(String identifier) throws ObjectNotFoundException {
+        daoFactory.getOrderDAO().delete(identifier);
     }
 
     public void setDaoFactory(IDAOFactory daoFactory) {
