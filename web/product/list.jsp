@@ -18,19 +18,27 @@
             </a>
             <div class="ms-product-actions">
                 <div class="ms-product-info">
-                    <span><fmt:formatNumber currencySymbol="&euro; " value="${product.getPrice()}" type="currency"/></span>
-
+                    <c:choose>
+                        <c:when test="${empty product.getActiveOffer().getOfferPrice()}">
+                            <span><fmt:formatNumber currencySymbol="&euro; " value="${product.getPrice()}" type="currency"/></span>
+                        </c:when>
+                        <c:otherwise>
+                        <span class="ms-old-price">
+                            <fmt:formatNumber currencySymbol="&euro; " value="${product.getPrice()}" type="currency"/>
+                        </span>
+                            <span><fmt:formatNumber currencySymbol="&euro; " value="${product.getActiveOffer().getOfferPrice()}" type="currency"/></span>
+                        </c:otherwise>
+                    </c:choose>
                     <span>
-                <c:choose>
-                    <c:when test="${product.getAmountStored() > 0}">
-                        Op voorraad
-                    </c:when>
-                    <c:otherwise>
-                        Uitverkocht
-                    </c:otherwise>
-                </c:choose>
-                </span>
-
+                    <c:choose>
+                        <c:when test="${product.getAmountStored() > 0}">
+                            Op voorraad
+                        </c:when>
+                        <c:otherwise>
+                            Uitverkocht
+                        </c:otherwise>
+                    </c:choose>
+                    </span>
 
                 </div>
 

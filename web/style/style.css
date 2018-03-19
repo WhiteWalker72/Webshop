@@ -205,6 +205,7 @@ h1 {
 
 .ms-product-actions {
 
+    position: relative;
     padding-top: 15px;
 }
 
@@ -220,7 +221,9 @@ h1 {
 
 .ms-product-actions .ms-product-cart {
 
-    float: right;
+    position: absolute;
+    right: 0;
+    bottom: 0;
 }
 
 .ms-product-actions .ms-product-cart .ms-product-cart-amount {
@@ -234,7 +237,7 @@ h1 {
     text-align: center;
 
     position: relative;
-    top: -2px;
+    top: -1px;
     left: 4px;
 
     outline: none;
@@ -249,6 +252,30 @@ h1 {
 .ms-product .ms-product-actions .ms-product-cart .ms-product-cart-button {
 
     margin-top: 5px;
+}
+
+.ms-old-price {
+    position: relative;
+    display: inline !important;
+    font-size: 13px;
+    color: #8b8b8b;
+}
+
+.ms-old-price:before {
+
+    position: absolute;
+    content: "";
+    left: 0;
+    top: 50%;
+    right: 0;
+    border-top: 1px solid;
+    border-color: inherit;
+
+    -webkit-transform:rotate(-5deg);
+    -moz-transform:rotate(-5deg);
+    -ms-transform:rotate(-5deg);
+    -o-transform:rotate(-5deg);
+    transform:rotate(-5deg);
 }
 
 .ms-clear {
