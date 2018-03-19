@@ -40,6 +40,7 @@
         <h2>Winkelmandje</h2>
 
         <table class="ms-cart-list">
+            <tbody>
             <c:forEach var="product" items="${cart}">
             <tr data-id="${product.key.id}">
                 <td>${product.key.name}</td>
@@ -48,6 +49,7 @@
                 <td class="ms-cart-delete">X</td>
             </tr>
             </c:forEach>
+            </tbody>
         </table>
 
         <div class="ms-total-price">Totaal: &euro; <span></span></div>
