@@ -51,21 +51,17 @@ public class OrderManager {
         }
         addingSet.add(orderDTO.getId());
 
-        new Timer().schedule(
-            new TimerTask() {
-                @Override
-                public void run() {
-                    //TODO: get giro number and save it with the offer
+        try {
+            PersistenceServices.getInstance().insertOrder(orderDTO);
+        } catch (ObjectAlreadyExistsException e) {
+            e.printStackTrace();
+        }
 
-                    try {
-                        PersistenceServices.getInstance().insertOrder(orderDTO);
-                    } catch (ObjectAlreadyExistsException e) {
-                        e.printStackTrace();
-                    }
-                }
-            },
-            30000
-        );
+        String customerName = "Klant";
+        int price = 0;
+
+        PaymentServices.getInstance().getGiroNumber(customerName, orderDTO.getAddressDTO(), price);
+
     }
 
     public OrderDTO getOrder(int orderId) throws ObjectNotFoundException {

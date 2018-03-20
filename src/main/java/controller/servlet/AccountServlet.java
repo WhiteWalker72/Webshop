@@ -25,7 +25,6 @@ public class AccountServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         String name = req.getParameter("name");
-        String email = req.getParameter("email");
         String street = req.getParameter("street");
         String number = req.getParameter("number");
         String postalCode = req.getParameter("postalcode");

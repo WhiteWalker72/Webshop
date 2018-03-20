@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -31,14 +32,11 @@ public class ProcessOrderServlet extends HttpServlet {
             int orderId = Integer.parseInt(PersistenceServices.getInstance().getNextOrderId());
 
             ArrayList<OrderLineDTO> orderLines = new ArrayList<>();
+
             orderLines.add(new OrderLineDTO(null, orderId, 1, 12.12, 1));
+
             OrderDTO order = new OrderDTO(orderId, 1, new Date(), address, orderLines);
 
-            double price = 12.12;
-
-            System.out.println(PaymentServices.getInstance().getGiroNumber("Klantnaam", address, price));
-
-            System.out.println(orderId);
             try {
                 PaymentServices.getInstance().saveOrder(order);
 

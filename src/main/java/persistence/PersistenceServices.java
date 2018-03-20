@@ -18,7 +18,8 @@ public class PersistenceServices {
     private IDAOFactory daoFactory;
 
     private PersistenceServices() {
-
+        setDaoFactory(new DAOSQLFactory(new MySQLDatabase("@airdev.nl", 33060
+                , "webshop", "webshop", "eqwl2722yEFx")));
     }
 
     public static PersistenceServices getInstance() {
@@ -29,16 +30,8 @@ public class PersistenceServices {
     }
 
     public void switchToTestDatabase() {
-        try {
-            InputStream input = new FileInputStream("config.properties");
-            Properties prop = new Properties();
-            prop.load(input);
-
-            setDaoFactory(new DAOSQLFactory(new MySQLDatabase(prop.getProperty("test_address"), Integer.parseInt(prop.getProperty("test_port"))
-                    , prop.getProperty("test_database"), prop.getProperty("test_username"), prop.getProperty("test_password"))));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        setDaoFactory(new DAOSQLFactory(new MySQLDatabase("@airdev.nl", 33060
+                , "webshop-test", "webshop", "eqwl2722yEFx")));
     }
 
     public String getNextProductId() {

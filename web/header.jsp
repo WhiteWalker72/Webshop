@@ -20,7 +20,16 @@
         <li class="left"><a href="/" class="ms-logo"></a></li>
         <li class="ms-menu-categories"><a href="#">Assortiment</a></li>
         <li class="right ms-menu-cart"><a href="#">Mand</a></li>
-        <li class="right"><a href="#">Account</a></li>
+        <li class="right">
+            <c:choose>
+            <c:when test="${empty user}">
+                <a href="/login.jsp">Login</a>
+            </c:when>
+            <c:otherwise>
+                <a href="/Logout">Loguit</a>
+            </c:otherwise>
+            </c:choose>
+        </li>
     </ul>
 </div>
 

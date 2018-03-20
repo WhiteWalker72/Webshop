@@ -1,5 +1,6 @@
 package controller.servlet;
 
+import domain.account.Account;
 import domain.cart.Cart;
 import domain.component.ComponentServices;
 
@@ -21,6 +22,11 @@ public class HeaderServlet extends HttpServlet {
         if(request.getSession().getAttribute("cart") == null) {
 
             request.getSession().setAttribute("cart", new Cart());
+        }
+
+        if(request.getSession().getAttribute("user") != null) {
+
+            request.setAttribute("user", (request.getSession().getAttribute("user")));
         }
 
         request.setAttribute("cart", ((Cart)request.getSession().getAttribute("cart")).getProducts());

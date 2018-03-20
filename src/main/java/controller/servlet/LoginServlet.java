@@ -30,6 +30,7 @@ public class LoginServlet extends HttpServlet {
         String salt = user.getSalt();
         String hashedPass = user.getPassword();
         if (new PassHashingStrategyImpl().passwordEquals(pass, salt, hashedPass)) {
+            request.getSession().setAttribute("user", user);
             response.sendRedirect("/");
         } else {
             request.getRequestDispatcher("/login.jsp").forward(request, response);
