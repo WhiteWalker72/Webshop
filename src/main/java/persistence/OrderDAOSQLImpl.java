@@ -6,11 +6,10 @@ import exceptions.ObjectAlreadyExistsException;
 import exceptions.ObjectNotFoundException;
 import utils.DateUtils;
 
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class OrderDAOSQLImpl extends DAOSQLImpl<OrderDTO> {
 
@@ -48,32 +47,7 @@ public class OrderDAOSQLImpl extends DAOSQLImpl<OrderDTO> {
     }
 
     private List<OrderLineDTO> getOrderLines(int orderId) {
-        List<OrderLineDTO> orderLines = new ArrayList<>();
-
-        try {
-            PreparedStatement statement = database.getPreparedStatement("SELECT * FROM bestelregel WHERE bestelling_id = ?");
-            statement.setInt(1, orderId);
-
-            ResultSet resultSet = statement.executeQuery();
-            if (resultSet != null && resultSet.next()) {
-                resultSet.beforeFirst();
-
-                while (resultSet.next()) {
-                    orderLines.add(new OrderLineDTO(
-                            resultSet.getInt("id")
-                            , orderId
-                            , resultSet.getInt("aantal")
-                            , resultSet.getDouble("prijs")
-                            , resultSet.getInt("product")
-                    ));
-                }
-            }
-            database.endStatement(statement);
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return orderLines;
+        return PersistenceServices.getInstance().getAllOrderLines().stream().filter(line -> line.getOrderId() == orderId).collect(Collectors.toList());
     }
 
     @Override
@@ -94,17 +68,7 @@ public class OrderDAOSQLImpl extends DAOSQLImpl<OrderDTO> {
         });
 
         for (OrderLineDTO lineDTO : dto.getOrderLines()) {
-            database.insertInto("bestelregel", 5, statement -> {
-                try {
-                    statement.setInt(1, lineDTO.getId());
-                    statement.setInt(2, dto.getId());
-                    statement.setInt(3, lineDTO.getAmount());
-                    statement.setDouble(4, lineDTO.getPrice());
-                    statement.setInt(5, lineDTO.getProductId());
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            });
+            PersistenceServices.getInstance().insertOrderLine(lineDTO);
         }
     }
 

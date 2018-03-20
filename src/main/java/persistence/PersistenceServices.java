@@ -124,6 +124,14 @@ public class PersistenceServices {
         return daoFactory.getOrderLineDAO().getNextUniqueId();
     }
 
+    void insertOrderLine(OrderLineDTO orderLineDTO) throws ObjectAlreadyExistsException {
+        daoFactory.getOrderLineDAO().insert(orderLineDTO);
+    }
+
+    List<OrderLineDTO> getAllOrderLines() {
+        return daoFactory.getOrderLineDAO().findAll();
+    }
+
     public OrderDTO findOrderById(String identifier) {
         return daoFactory.getOrderDAO().findById(identifier);
     }
