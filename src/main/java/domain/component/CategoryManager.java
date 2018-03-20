@@ -25,6 +25,9 @@ public class CategoryManager implements IComponentManager<Category, CategoryDTO>
 
     @Override
     public void addNewComponent(CategoryDTO compDTO) throws ObjectAlreadyExistsException {
+        if (compDTO.getId() == null) {
+            compDTO.setId(Integer.parseInt(PersistenceServices.getInstance().getNextCategoryId()));
+        }
         if (categoryIdMap.containsKey(compDTO.getId())) {
             throw new ObjectAlreadyExistsException("category", "CategoryManager categoryIdMap");
         }

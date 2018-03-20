@@ -13,7 +13,7 @@ public class CategoryDTO extends ComponentDTO {
 
     }
 
-    public CategoryDTO(int id, String name, String description, String image, List<Integer> productIdList) {
+    public CategoryDTO(Integer id, String name, String description, String image, List<Integer> productIdList) {
         super(id, name, description, image);
         this.productIdList = productIdList;
     }

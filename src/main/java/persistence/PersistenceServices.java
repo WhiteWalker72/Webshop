@@ -1,7 +1,6 @@
 package persistence;
 
 import domain.account.Account;
-import domain.account.Address;
 import domain.account.Customer;
 import dto.*;
 import exceptions.ObjectAlreadyExistsException;
@@ -19,7 +18,7 @@ public class PersistenceServices {
     private IDAOFactory daoFactory;
 
     private PersistenceServices() {
-        
+
     }
 
     public static PersistenceServices getInstance() {
@@ -42,6 +41,10 @@ public class PersistenceServices {
         }
     }
 
+    public String getNextProductId() {
+        return daoFactory.getProductDAO().getNextUniqueId();
+    }
+
     public List<ProductDTO> findAllProducts() {
         return daoFactory.getProductDAO().findAll();
     }
@@ -60,6 +63,10 @@ public class PersistenceServices {
 
     public void deleteProduct(String identifier) throws ObjectNotFoundException {
         daoFactory.getProductDAO().delete(identifier);
+    }
+
+    public String getNextCategoryId() {
+        return daoFactory.getCategoryDAO().getNextUniqueId();
     }
 
     public List<CategoryDTO> findAllCategories() {
