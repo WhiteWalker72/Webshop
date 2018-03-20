@@ -13,7 +13,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import java.util.List;
 
-@Path("/product")
+@Path("/products")
 public class ProductResource {
 
     private final ComponentServices compServices = ComponentServices.getInstance();
@@ -25,6 +25,13 @@ public class ProductResource {
     @Produces("application/json")
     public List<Product> getAllProducts() {
         return compServices.getAllProducts();
+    }
+
+    @GET
+    @Path("{id}/categories")
+    @Produces("application/json")
+    public List<Category> getCategoriesForProduct(@PathParam("id") int productId) {
+        return compServices.getProductCategories(productId);
     }
 
     @DELETE

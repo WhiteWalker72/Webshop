@@ -18,6 +18,6 @@
 
 <div class="ms-total-price">Totaal: &euro; <span></span></div>
 
-<a href="/checkout/success.jsp" class="ms-button">Bestelling plaatsen</a>
+<a href="/checkout/success" class="ms-button">Bestelling plaatsen</a>
 
 <jsp:include page="/footer.jsp"></jsp:include>
