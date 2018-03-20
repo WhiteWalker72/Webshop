@@ -19,7 +19,7 @@ public class PersistenceServices {
     private IDAOFactory daoFactory;
 
     private PersistenceServices() {
-
+        
     }
 
     public static PersistenceServices getInstance() {
@@ -124,6 +124,14 @@ public class PersistenceServices {
 
     public String getNextOrderLineId() {
         return daoFactory.getOrderLineDAO().getNextUniqueId();
+    }
+
+    void insertOrderLine(OrderLineDTO orderLineDTO) throws ObjectAlreadyExistsException {
+        daoFactory.getOrderLineDAO().insert(orderLineDTO);
+    }
+
+    List<OrderLineDTO> getAllOrderLines() {
+        return daoFactory.getOrderLineDAO().findAll();
     }
 
     public OrderDTO findOrderById(String identifier) {
