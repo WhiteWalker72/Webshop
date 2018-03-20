@@ -2,6 +2,11 @@ package persistence;
 
 import domain.account.Account;
 import exceptions.ObjectAlreadyExistsException;
+import exceptions.ObjectNotFoundException;
+
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import java.sql.*;
 
@@ -64,7 +69,7 @@ public class AccountDAOSQLImpl extends DAOSQLImpl<Account> {
                 statement.setString(4, dto.getUsername());
                 statement.setString(5, dto.getPassword());
                 statement.setString(6, dto.getSalt());
-                statement.setNull(7, Types.INTEGER);
+                statement.setInt(7, dto.getCustomerId());
             } catch (SQLException e) {
                 e.printStackTrace();
             }

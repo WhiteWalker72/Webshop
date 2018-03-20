@@ -2,6 +2,7 @@ package persistence;
 
 import domain.account.Customer;
 import dto.AddressDTO;
+import dto.CategoryDTO;
 import exceptions.ObjectAlreadyExistsException;
 import exceptions.ObjectNotFoundException;
 
@@ -18,11 +19,21 @@ public class CustomerDAOSQLImpl extends DAOSQLImpl<Customer> {
 
     @Override
     public String getNextUniqueId() {
-        if (lastId == null) {
-            lastId = findAll().stream().mapToInt(Customer::getCustomerID).max().orElse(1) + 1;
+        PreparedStatement statement = database.getPreparedStatement("SELECT MAX(id) FROM " + tableName);
+        try {
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet != null && resultSet.next()) {
+                lastId = resultSet.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-        lastId += 1;
-        return lastId + "";
+        if (lastId == null) {
+            lastId = 1;
+        }
+
+        return (1 + lastId) + "";
     }
 
     @Override

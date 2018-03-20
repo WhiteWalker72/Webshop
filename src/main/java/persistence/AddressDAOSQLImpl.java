@@ -18,12 +18,23 @@ public class AddressDAOSQLImpl extends DAOSQLImpl<AddressDTO> {
 
     @Override
     public String getNextUniqueId() {
-        if (lastId == null) {
-            lastId = findById("" + 1) == null ? 0 : findAll().stream().map(AddressDTO::getId).reduce(Integer.MIN_VALUE, Integer::max);
+        PreparedStatement statement = database.getPreparedStatement("SELECT MAX(id) FROM " + tableName);
+        try {
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet != null && resultSet.next()) {
+                lastId = resultSet.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-        lastId += 1;
-        return lastId + "";
+        if (lastId == null) {
+            lastId = 1;
+        }
+
+        return (1 + lastId) + "";
     }
+
 
     @Override
     AddressDTO getObjectFromResultSet(ResultSet resultSet) {

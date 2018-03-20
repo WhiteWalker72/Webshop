@@ -42,6 +42,7 @@ public class AccountServlet extends HttpServlet {
         Pair<String, String> saltPassPair = new PassHashingStrategyImpl().hashPassword(psw);
         try {
             int adresId = Integer.parseInt(PersistenceServices.getInstance().getNextAddressId());
+            System.out.println(adresId);
             PersistenceServices.getInstance().insertAddress(new AddressDTO(adresId, street, number, postalCode, city, country));
 
             int customerId = Integer.parseInt(PersistenceServices.getInstance().getNextCustomerId());
