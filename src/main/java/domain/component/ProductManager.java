@@ -37,6 +37,9 @@ public class ProductManager implements IComponentManager<Product, ProductDTO> {
 
     @Override
     public void addNewComponent(ProductDTO compDTO) throws ObjectAlreadyExistsException {
+        if (compDTO.getId() == null) {
+            compDTO.setId(Integer.parseInt(PersistenceServices.getInstance().getNextProductId()));
+        }
         if (productIdMap.containsKey(compDTO.getId())) {
             throw new ObjectAlreadyExistsException("product", "ProductManager productIdMap");
         }
