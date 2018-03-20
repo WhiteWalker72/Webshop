@@ -3,10 +3,7 @@ package persistence;
 import domain.account.Account;
 import exceptions.ObjectAlreadyExistsException;
 
-import java.sql.Date;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Types;
+import java.sql.*;
 
 public class AccountDAOSQLImpl extends DAOSQLImpl<Account> {
 
@@ -18,11 +15,21 @@ public class AccountDAOSQLImpl extends DAOSQLImpl<Account> {
 
     @Override
     public String getNextUniqueId() {
-        if (lastId == null) {
-            lastId = findAll().stream().mapToInt(Account::getAccountID).max().orElse(1) + 1;
+        PreparedStatement statement = database.getPreparedStatement("SELECT MAX(id) FROM " + tableName);
+        try {
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet != null && resultSet.next()) {
+                lastId = resultSet.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-        lastId += 1;
-        return lastId + "";
+        if (lastId == null) {
+            lastId = 1;
+        }
+
+        return (1 + lastId) + "";
     }
 
     @Override
@@ -34,6 +41,7 @@ public class AccountDAOSQLImpl extends DAOSQLImpl<Account> {
                     , resultSet.getInt("isactief")
                     , resultSet.getString("gebruikersnaam")
                     , resultSet.getString("wachtwoord")
+                    , resultSet.getInt("klant")
                     , resultSet.getString("salt")
             );
         } catch (SQLException e) {

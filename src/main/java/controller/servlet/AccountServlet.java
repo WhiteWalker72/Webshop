@@ -8,9 +8,12 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Date;
 
+import domain.account.Address;
+import domain.account.Customer;
 import domain.account.PassHashingStrategyImpl;
 
 import domain.account.Account;
+import dto.AddressDTO;
 import exceptions.ObjectAlreadyExistsException;
 import persistence.PersistenceServices;
 import utils.Pair;
@@ -27,6 +30,7 @@ public class AccountServlet extends HttpServlet {
         String number = req.getParameter("number");
         String postalCode = req.getParameter("postalcode");
         String city = req.getParameter("city");
+        String country = req.getParameter("country");
         String username = req.getParameter("username");
         String psw = req.getParameter("psw");
 
@@ -37,8 +41,17 @@ public class AccountServlet extends HttpServlet {
 
         Pair<String, String> saltPassPair = new PassHashingStrategyImpl().hashPassword(psw);
         try {
+            int adresId = Integer.parseInt(PersistenceServices.getInstance().getNextAddressId());
+            PersistenceServices.getInstance().insertAddress(new AddressDTO(adresId, street, number, postalCode, city, country));
+
+            int customerId = Integer.parseInt(PersistenceServices.getInstance().getNextCustomerId());
+            System.out.println(customerId);
+            PersistenceServices.getInstance().insertCustomer(new Customer(customerId
+                    , name, adresId));
+
             PersistenceServices.getInstance().insertAccount(new Account(Integer.parseInt(PersistenceServices.getInstance().getNextAccountId())
-                    , new Date(), 1, username, saltPassPair.getLeft(), saltPassPair.getRight()));
+                    , new Date(), 1, username, saltPassPair.getLeft(), customerId, saltPassPair.getRight()));
+
         } catch (ObjectAlreadyExistsException e) {
             // req.getRequestDispatcher("/createaccount.jsp").forward(req, resp);
             resp.sendRedirect("/createaccount.jsp");

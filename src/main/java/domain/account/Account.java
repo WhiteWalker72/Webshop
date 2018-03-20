@@ -21,15 +21,6 @@ public class Account {
         this.salt = salt;
     }
 
-    public Account(int accountID, Date startDate, int isActive, String username, String password, String salt) {
-        this.accountID = accountID;
-        this.startDate = startDate;
-        this.isActive = isActive;
-        this.username = username;
-        this.password = password;
-        this.salt = salt;
-    }
-
     public int getAccountID() {
         return accountID;
     }

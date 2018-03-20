@@ -19,7 +19,7 @@ public class AddressDAOSQLImpl extends DAOSQLImpl<AddressDTO> {
     @Override
     public String getNextUniqueId() {
         if (lastId == null) {
-            lastId = findAll().stream().mapToInt(AddressDTO::getId).max().orElse(1) + 1;
+            lastId = findById("" + 1) == null ? 0 : findAll().stream().map(AddressDTO::getId).reduce(Integer.MIN_VALUE, Integer::max);
         }
         lastId += 1;
         return lastId + "";
@@ -31,7 +31,7 @@ public class AddressDAOSQLImpl extends DAOSQLImpl<AddressDTO> {
             return new AddressDTO(
                     resultSet.getInt("id")
                     , resultSet.getString("straat")
-                    , resultSet.getInt("nummer")
+                    , resultSet.getString("nummer")
                     , resultSet.getString("postcode")
                     , resultSet.getString("plaats")
                     , resultSet.getString("land")
@@ -52,7 +52,7 @@ public class AddressDAOSQLImpl extends DAOSQLImpl<AddressDTO> {
             try {
                 statement.setInt(1, dto.getId());
                 statement.setString(2, dto.getStreet());
-                statement.setInt(3, dto.getNumber());
+                statement.setString(3, dto.getNumber());
                 statement.setString(4, dto.getPostalCode());
                 statement.setString(5, dto.getCity());
                 statement.setString(6, dto.getCountry());
@@ -72,7 +72,7 @@ public class AddressDAOSQLImpl extends DAOSQLImpl<AddressDTO> {
 
         try {
             statement.setString(1, dto.getStreet());
-            statement.setInt(2, dto.getNumber());
+            statement.setString(2, dto.getNumber());
             statement.setString(3, dto.getPostalCode());
             statement.setString(4, dto.getCity());
             statement.setString(5, dto.getCountry());

@@ -21,7 +21,7 @@ public class CategoryDAOSQLImpl extends DAOSQLImpl<CategoryDTO> {
     @Override
     public String getNextUniqueId() {
         if (lastId == null) {
-            lastId = findAll().stream().mapToInt(CategoryDTO::getId).max().orElse(1) + 1;
+            lastId = findById("" + 1) == null ? 0 : findAll().stream().map(CategoryDTO::getId).reduce(Integer.MIN_VALUE, Integer::max);
         }
         lastId += 1;
         return lastId + "";

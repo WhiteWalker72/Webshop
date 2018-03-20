@@ -20,7 +20,7 @@ public class OfferDAOSQLImpl extends DAOSQLImpl<OfferDTO> {
     @Override
     public String getNextUniqueId() {
         if (lastId == null) {
-            lastId = findAll().stream().mapToInt(OfferDTO::getId).max().orElse(1) + 1;
+            lastId = findById("" + 1) == null ? 0 : findAll().stream().map(OfferDTO::getId).reduce(Integer.MIN_VALUE, Integer::max);
         }
         lastId += 1;
         return lastId + "";
