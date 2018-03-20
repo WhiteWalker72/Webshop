@@ -28,13 +28,17 @@ public class ProcessOrderServlet extends HttpServlet {
 
             response.sendRedirect("/");
         } else {
-            AddressDTO address = new AddressDTO(1, "Straat", 1, "1234AB", "Utrecht", "Nederland");
+            AddressDTO address = new AddressDTO(1, "Straat", "1", "1234AB", "Utrecht", "Nederland");
 
             int orderId = Integer.parseInt(PersistenceServices.getInstance().getNextOrderId());
 
             ArrayList<OrderLineDTO> orderLines = new ArrayList<>();
             orderLines.add(new OrderLineDTO(null, orderId, 1, 12.12, 1));
             OrderDTO order = new OrderDTO(orderId, 1, new Date(), address, orderLines);
+
+            double price = 12.12;
+
+            System.out.println(PaymentServices.getInstance().getGiroNumber("Klantnaam", address, price));
 
             System.out.println(orderId);
             try {
