@@ -8,7 +8,7 @@
 
 <form method="post" action="/Login">
 
-    <div class="container">
+    <div class="ms-login">
         <label for="username"><b>Gebruikersnaam</b></label>
         <input type="text" placeholder="Voer gebruikersnaam in" name="username" id="username" required>
 

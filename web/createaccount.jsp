@@ -5,7 +5,7 @@
 </jsp:include>
 
 <form method="post", action="/Account" style="border:1px solid #F9F9F9">
-    <div class="container">
+    <div class="ms-login">
 
         <label for="naam"><b>Voor en achternaam</b></label>
         <input type="text" placeholder="Voer uw naam in" name="name" id="naam" required>

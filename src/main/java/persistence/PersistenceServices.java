@@ -146,6 +146,10 @@ public class PersistenceServices {
         daoFactory.getOrderDAO().insert(orderDTO);
     }
 
+    public void updateOrder(OrderDTO orderDTO) throws ObjectNotFoundException {
+        daoFactory.getOrderDAO().update(orderDTO);
+    }
+
     public void deleteOrder(String identifier) throws ObjectNotFoundException {
         daoFactory.getOrderDAO().delete(identifier);
     }

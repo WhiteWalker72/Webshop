@@ -40,6 +40,7 @@ public class OrderDAOSQLImpl extends DAOSQLImpl<OrderDTO> {
                     , DateUtils.fromSQLToJavaDate(resultSet.getDate("datum"))
                     , PersistenceServices.getInstance().findAddressById("" + resultSet.getInt("afleveradres"))
                     , getOrderLines(orderId)
+                    , resultSet.getInt("gironummer")
             );
         } catch (SQLException e) {
             e.printStackTrace();
@@ -57,12 +58,13 @@ public class OrderDAOSQLImpl extends DAOSQLImpl<OrderDTO> {
             throw new ObjectAlreadyExistsException(tableName, "the database");
         }
 
-        database.insertInto(tableName, 4, statement -> {
+        database.insertInto(tableName, 5, statement -> {
             try {
                 statement.setInt(1, dto.getId());
                 statement.setInt(2, dto.getCustomerId());
                 statement.setDate(3, DateUtils.fromJavaToSQLDate(dto.getOrderDate()));
                 statement.setInt(4, dto.getAddressDTO().getId());
+                statement.setInt(5, dto.getGiro());
             } catch (SQLException e) {
                 e.printStackTrace();
             }

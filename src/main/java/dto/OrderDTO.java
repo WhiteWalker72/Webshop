@@ -10,13 +10,15 @@ public class OrderDTO {
     private final Date orderDate;
     private final AddressDTO addressDTO;
     private final List<OrderLineDTO> orderLines;
+    private final Integer giro;
 
-    public OrderDTO(Integer id, int customerId, Date orderDate, AddressDTO addressDTO, List<OrderLineDTO> orderLines) {
+    public OrderDTO(Integer id, int customerId, Date orderDate, AddressDTO addressDTO, List<OrderLineDTO> orderLines, Integer giro) {
         this.id = id;
         this.customerId = customerId;
         this.orderDate = orderDate;
         this.addressDTO = addressDTO;
         this.orderLines = orderLines;
+        this.giro = giro;
     }
 
     public Integer getId() {
@@ -42,5 +44,7 @@ public class OrderDTO {
     public List<OrderLineDTO> getOrderLines() {
         return orderLines;
     }
+
+    public Integer getGiro() { return giro; }
 
 }

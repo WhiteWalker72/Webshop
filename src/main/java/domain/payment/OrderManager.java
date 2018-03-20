@@ -58,9 +58,11 @@ public class OrderManager {
         }
 
         String customerName = "Klant";
-        int price = 0;
+        double price = 0;
 
-        PaymentServices.getInstance().getGiroNumber(customerName, orderDTO.getAddressDTO(), price);
+        for (OrderLineDTO line : orderDTO.getOrderLines()) {
+            price += line.getAmount() * line.getPrice();
+        }
 
     }
 

@@ -46,11 +46,18 @@ class CartController {
             "amount": amount
         }, function (data) {
 
+            var price = data.price;
+
+            if(data.activeOffer != null) {
+
+                price = data.activeOffer.offerPrice;
+            }
+
             var template = `
             <tr data-id="${data.id}">
                 <td>${data.name}</td>
                 <td><input type="text" class="ms-cart-amount" value="${amount}"></td>
-                <td>&euro; <span class="ms-cart-price">${data.price}</span></td>
+                <td>&euro; <span class="ms-cart-price">${price}</span></td>
                 <td class="ms-cart-delete">X</td>
             </tr>`;
 

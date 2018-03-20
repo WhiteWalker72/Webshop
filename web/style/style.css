@@ -446,7 +446,7 @@ h1 {
     display: inline-block;
 }
 
-input[type=text], input[type=password] {
+.ms-login input[type=text], .ms-login input[type=password] {
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0;

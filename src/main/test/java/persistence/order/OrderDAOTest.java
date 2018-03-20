@@ -96,7 +96,7 @@ public class OrderDAOTest {
         perServices.insertOrder(new OrderDTO(1, 1, new Date()
                 , new AddressDTO(1, "street", "test", "1234ZP", "city", "country")
                 , new ArrayList<>(Collections.singletonList(new OrderLineDTO
-                (1, 1, 5, 20, 1)))));
+                (1, 1, 5, 20, 1))), null));
     }
 
     private void deleteTestOrder() throws ObjectNotFoundException {
