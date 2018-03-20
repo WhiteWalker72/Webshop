@@ -14,8 +14,19 @@ import java.util.List;
 
 public class OrderDAOSQLImpl extends DAOSQLImpl<OrderDTO> {
 
+    private Integer lastId = null;
+
     OrderDAOSQLImpl(SQLDatabase database) {
         super(database, "bestelling", "id");
+    }
+
+    @Override
+    public String getNextUniqueId() {
+        if (lastId == null) {
+            lastId = findAll().stream().mapToInt(OrderDTO::getId).max().orElse(1) + 1;
+        }
+        lastId += 1;
+        return lastId + "";
     }
 
     @Override
@@ -75,7 +86,7 @@ public class OrderDAOSQLImpl extends DAOSQLImpl<OrderDTO> {
             try {
                 statement.setInt(1, dto.getId());
                 statement.setInt(2, dto.getCustomerId());
-                statement.setDate(3, DateUtils.fromJavaToSQLDate(dto.getOderDate()));
+                statement.setDate(3, DateUtils.fromJavaToSQLDate(dto.getOrderDate()));
                 statement.setInt(4, dto.getAddressDTO().getId());
             } catch (SQLException e) {
                 e.printStackTrace();

@@ -5,13 +5,13 @@ import java.util.List;
 
 public class OrderDTO {
 
-    private final int id;
+    private Integer id;
     private final int customerId;
     private final Date orderDate;
     private final AddressDTO addressDTO;
     private final List<OrderLineDTO> orderLines;
 
-    public OrderDTO(int id, int customerId, Date orderDate, AddressDTO addressDTO, List<OrderLineDTO> orderLines) {
+    public OrderDTO(Integer id, int customerId, Date orderDate, AddressDTO addressDTO, List<OrderLineDTO> orderLines) {
         this.id = id;
         this.customerId = customerId;
         this.orderDate = orderDate;
@@ -19,8 +19,12 @@ public class OrderDTO {
         this.orderLines = orderLines;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public int getCustomerId() {

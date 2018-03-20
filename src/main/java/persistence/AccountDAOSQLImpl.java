@@ -2,7 +2,6 @@ package persistence;
 
 import domain.account.Account;
 import exceptions.ObjectAlreadyExistsException;
-import exceptions.ObjectNotFoundException;
 
 import java.sql.Date;
 import java.sql.ResultSet;
@@ -11,8 +10,19 @@ import java.sql.Types;
 
 public class AccountDAOSQLImpl extends DAOSQLImpl<Account> {
 
+    private Integer lastId = null;
+
     AccountDAOSQLImpl(SQLDatabase database) {
         super(database, "account", "gebruikersnaam");
+    }
+
+    @Override
+    public String getNextUniqueId() {
+        if (lastId == null) {
+            lastId = findAll().stream().mapToInt(Account::getAccountID).max().orElse(1) + 1;
+        }
+        lastId += 1;
+        return lastId + "";
     }
 
     @Override

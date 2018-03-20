@@ -2,13 +2,13 @@ package dto;
 
 public class OrderLineDTO {
 
-    private final int id;
+    private Integer id;
     private final int orderId;
     private final int amount;
     private final double price;
     private final int productId;
 
-    public OrderLineDTO(int id, int orderId, int amount, double price, int productId) {
+    public OrderLineDTO(Integer id, int orderId, int amount, double price, int productId) {
         this.id = id;
         this.orderId = orderId;
         this.amount = amount;
@@ -16,8 +16,12 @@ public class OrderLineDTO {
         this.productId = productId;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public int getOrderId() {

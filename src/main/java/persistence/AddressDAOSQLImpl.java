@@ -10,8 +10,19 @@ import java.sql.SQLException;
 
 public class AddressDAOSQLImpl extends DAOSQLImpl<AddressDTO> {
 
+    private Integer lastId = null;
+
     AddressDAOSQLImpl(SQLDatabase database) {
         super(database, "adres", "id");
+    }
+
+    @Override
+    public String getNextUniqueId() {
+        if (lastId == null) {
+            lastId = findAll().stream().mapToInt(AddressDTO::getId).max().orElse(1) + 1;
+        }
+        lastId += 1;
+        return lastId + "";
     }
 
     @Override

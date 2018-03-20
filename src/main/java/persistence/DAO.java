@@ -7,6 +7,8 @@ import java.util.List;
 
 public interface DAO<T> {
 
+    String getNextUniqueId();
+
     List<T> findAll();
     T findById(String identifier);
 

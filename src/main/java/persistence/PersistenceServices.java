@@ -116,6 +116,14 @@ public class PersistenceServices {
         daoFactory.getAddressDAO().delete(identifier);
     }
 
+    public String getNextOrderId() {
+        return daoFactory.getOfferDAO().getNextUniqueId();
+    }
+
+    public String getNextOrderLineId() {
+        return daoFactory.getOrderLineDAO().getNextUniqueId();
+    }
+
     public OrderDTO findOrderById(String identifier) {
         return daoFactory.getOrderDAO().findById(identifier);
     }

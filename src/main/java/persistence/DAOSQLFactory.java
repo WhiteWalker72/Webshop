@@ -11,6 +11,7 @@ public class DAOSQLFactory implements IDAOFactory {
     private final DAO<AddressDTO> addressDAO;
     private final DAO<OrderDTO> orderDAO;
     private final DAO<Account> accountDAO;
+    private final DAO<OrderLineDTO> orderLineDAO;
 
     DAOSQLFactory(SQLDatabase database) {
         productDAO = new ProductDAOSQLImpl(database);
@@ -19,6 +20,7 @@ public class DAOSQLFactory implements IDAOFactory {
         addressDAO = new AddressDAOSQLImpl(database);
         orderDAO = new OrderDAOSQLImpl(database);
         accountDAO = new AccountDAOSQLImpl(database);
+        orderLineDAO = new OrderLineDAOSQLImpl(database);
     }
 
     @Override
@@ -50,4 +52,10 @@ public class DAOSQLFactory implements IDAOFactory {
     public DAO<Account> getAccountDAO() {
         return accountDAO;
     }
+
+    @Override
+    public DAO<OrderLineDTO> getOrderLineDAO() {
+        return orderLineDAO;
+    }
+
 }

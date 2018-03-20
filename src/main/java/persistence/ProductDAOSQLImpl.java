@@ -10,8 +10,19 @@ import java.sql.SQLException;
 
 public class ProductDAOSQLImpl extends DAOSQLImpl<ProductDTO> {
 
+    private Integer lastId;
+
     ProductDAOSQLImpl(SQLDatabase database) {
         super(database, "product", "Id");
+    }
+
+    @Override
+    public String getNextUniqueId() {
+        if (lastId == null) {
+            lastId = findAll().stream().mapToInt(ProductDTO::getId).max().orElse(1) + 1;
+        }
+        lastId += 1;
+        return lastId + "";
     }
 
     @Override

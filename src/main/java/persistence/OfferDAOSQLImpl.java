@@ -11,8 +11,19 @@ import java.sql.SQLException;
 
 public class OfferDAOSQLImpl extends DAOSQLImpl<OfferDTO> {
 
+    private Integer lastId = null;
+
     OfferDAOSQLImpl(SQLDatabase database) {
         super(database, "aanbieding", "id");
+    }
+
+    @Override
+    public String getNextUniqueId() {
+        if (lastId == null) {
+            lastId = findAll().stream().mapToInt(OfferDTO::getId).max().orElse(1) + 1;
+        }
+        lastId += 1;
+        return lastId + "";
     }
 
     @Override

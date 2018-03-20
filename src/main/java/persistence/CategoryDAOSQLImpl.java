@@ -12,8 +12,19 @@ import java.util.List;
 
 public class CategoryDAOSQLImpl extends DAOSQLImpl<CategoryDTO> {
 
+    private Integer lastId = null;
+
     CategoryDAOSQLImpl(SQLDatabase database) {
         super(database, "categorie", "id");
+    }
+
+    @Override
+    public String getNextUniqueId() {
+        if (lastId == null) {
+            lastId = findAll().stream().mapToInt(CategoryDTO::getId).max().orElse(1) + 1;
+        }
+        lastId += 1;
+        return lastId + "";
     }
 
     @Override

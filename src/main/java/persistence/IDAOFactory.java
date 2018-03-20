@@ -17,4 +17,6 @@ public interface IDAOFactory {
 
     DAO<Account> getAccountDAO();
 
+    DAO<OrderLineDTO> getOrderLineDAO();
+
 }
