@@ -7,14 +7,14 @@ public class OrderDTO {
 
     private final int id;
     private final int customerId;
-    private final Date oderDate;
+    private final Date orderDate;
     private final AddressDTO addressDTO;
     private final List<OrderLineDTO> orderLines;
 
-    public OrderDTO(int id, int customerId, Date oderDate, AddressDTO addressDTO, List<OrderLineDTO> orderLines) {
+    public OrderDTO(int id, int customerId, Date orderDate, AddressDTO addressDTO, List<OrderLineDTO> orderLines) {
         this.id = id;
         this.customerId = customerId;
-        this.oderDate = oderDate;
+        this.orderDate = orderDate;
         this.addressDTO = addressDTO;
         this.orderLines = orderLines;
     }
@@ -27,8 +27,8 @@ public class OrderDTO {
         return customerId;
     }
 
-    public Date getOderDate() {
-        return oderDate;
+    public Date getOrderDate() {
+        return orderDate;
     }
 
     public AddressDTO getAddressDTO() {
