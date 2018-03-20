@@ -93,7 +93,7 @@ public class AddressDAOTest {
         assertNotEquals(null, addressDTO);
 
         String newStreet = "newStreet";
-        int newNumber = 99;
+        String newNumber = "99A";
         String newPostal = "1930TE";
         String newCity = "newCity";
         String newCountry = "newCountry";
@@ -119,7 +119,7 @@ public class AddressDAOTest {
     }
 
     private void addTestAddress() throws ObjectAlreadyExistsException {
-        PersistenceServices.getInstance().insertAddress(new AddressDTO(1, "street", 1, "5910ZP", "Utrecht", "country"));
+        PersistenceServices.getInstance().insertAddress(new AddressDTO(1, "street", 1 + "", "5910ZP", "Utrecht", "country"));
     }
 
     private void deleteTestAddress() throws ObjectNotFoundException {

@@ -23,6 +23,7 @@ public class OrderDAOSQLImpl extends DAOSQLImpl<OrderDTO> {
     public String getNextUniqueId() {
         if (lastId == null) {
             lastId = findById("" + 1) == null ? 0 : findAll().stream().map(OrderDTO::getId).reduce(Integer.MIN_VALUE, Integer::max);
+            System.out.println(lastId);
         }
         lastId += 1;
         return lastId + "";

@@ -2,7 +2,9 @@ package controller.rest;
 
 import domain.component.Category;
 import domain.component.ComponentServices;
+import domain.component.Product;
 import dto.CategoryDTO;
+import dto.ProductDTO;
 import exceptions.ObjectAlreadyExistsException;
 import exceptions.ObjectNotFoundException;
 
@@ -12,7 +14,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import java.util.List;
 
-@Path("/category")
+@Path("/categories")
 public class CategoryResource {
 
     private final ComponentServices compServices = ComponentServices.getInstance();
@@ -24,6 +26,13 @@ public class CategoryResource {
     @Produces("application/json")
     public List<Category> getAllCategories() {
         return compServices.getAllCategories();
+    }
+
+    @GET
+    @Path("{id}/products")
+    @Produces("application/json")
+    public List<Product> getCategoriesForProduct(@PathParam("id") int productId) {
+        return compServices.getAllProductsByCategory(productId);
     }
 
     @DELETE
@@ -72,6 +81,55 @@ public class CategoryResource {
         return Response.status(Response.Status.OK).build();
     }
 
+    @POST
+    @Path("/{id}/products")
+    @Consumes("application/json")
+    public Response addProductToCategory(@PathParam("id") int id, ProductDTO productDTO) {
+        Category category = compServices.getCategory(id);
+        if (category == null) {
+            return Response.status(400).entity("Category with id '" + id + "' does not exists.").build();
+        }
+        Product product = compServices.getProduct(productDTO.getId());
+        if (product == null) {
+            return Response.status(400).entity("Product with id '" + product.getId() + "' does not exists.").build();
+        }
 
+        List<Category> productCategories = compServices.getProductCategories(productDTO.getId());
+        if (productCategories.contains(category)) {
+            return Response.status(400).entity("Product is already added to this category.").build();
+        }
 
+        try {
+            compServices.addProductToCategory(product, category);
+        } catch (ObjectNotFoundException e) {
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
+        return Response.status(Response.Status.OK).build();
+    }
+
+    @DELETE
+    @Path("/{id}/products/{productId}")
+    @Consumes("application/json")
+    public Response deleteProductFromCategory(@PathParam("id") int id, @PathParam("productId") int productId) {
+        Category category = compServices.getCategory(id);
+        if (category == null) {
+            return Response.status(400).entity("Category with id '" + id + "' does not exists.").build();
+        }
+        Product product = compServices.getProduct(productId);
+        if (product == null) {
+            return Response.status(400).entity("Product with id '" + product.getId() + "' does not exists.").build();
+        }
+
+        List<Category> productCategories = compServices.getProductCategories(productId);
+        if (!productCategories.contains(category)) {
+            return Response.status(400).entity("Product is not in this category.").build();
+        }
+
+        try {
+            compServices.removeProductFromCategory(product, category);
+        } catch (ObjectNotFoundException e) {
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
+        return Response.status(Response.Status.OK).build();
+    }
 }

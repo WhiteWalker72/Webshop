@@ -11,7 +11,7 @@ public class ProductDTO extends ComponentDTO {
 
     }
 
-    public ProductDTO(int id, String name, String description, String image, double price, int amountStored) {
+    public ProductDTO(Integer id, String name, String description, String image, double price, int amountStored) {
         super(id, name, description, image);
         this.price = price;
         this.amountStored = amountStored;

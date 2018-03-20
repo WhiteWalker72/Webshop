@@ -1,13 +1,13 @@
 package persistence;
 
 import domain.account.Customer;
-import dto.AddressDTO;
-import dto.CategoryDTO;
 import exceptions.ObjectAlreadyExistsException;
 import exceptions.ObjectNotFoundException;
 
-import java.sql.*;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Types;
 
 public class CustomerDAOSQLImpl extends DAOSQLImpl<Customer> {
 
