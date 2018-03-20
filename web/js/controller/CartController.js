@@ -1,39 +1,22 @@
 class CartController {
 
     constructor() {
-        this.calculateTotal();
+        CartController.addListeners();
+        CartController.calculateTotal();
 
-        var cartButton = document.querySelectorAll(".ms-product-cart-button");
+        document.querySelector(".ms-total-price span").addEventListener("change", function () {
+            alert("test");
+        })
 
         var _self = this;
+
+        var cartButton = document.querySelectorAll(".ms-product-cart-button");
 
         cartButton.forEach(function(button) {
 
             button.addEventListener("click", (event) => {
 
                 _self.addToCart(event);
-            });
-
-        });
-
-        var amountField = document.querySelectorAll(".ms-cart-amount");
-
-        amountField.forEach(function(button) {
-
-            button.addEventListener("change", (event) => {
-
-                _self.editCart(event);
-            });
-
-        });
-
-        var deleteButton = document.querySelectorAll(".ms-cart-delete");
-
-        deleteButton.forEach(function(button) {
-
-            button.addEventListener("click", (event) => {
-
-                _self.removeFromCart(event);
             });
 
         });
@@ -56,10 +39,12 @@ class CartController {
 
         var amount = event.target.parentElement.querySelector('.ms-product-cart-amount').value;
 
+        var self = this;
+
         request('/api/cart', 'POST', {
             "id": event.target.parentElement.dataset.id,
             "amount": amount
-        }, function (data, self) {
+        }, function (data) {
 
             var template = `
             <tr data-id="${data.id}">
@@ -76,31 +61,31 @@ class CartController {
              else
                  product.querySelector('.ms-cart-amount').value = +product.querySelector('.ms-cart-amount').value + +amount;
 
+            CartController.addListeners();
+            CartController.calculateTotal();
         });
-
-        this.calculateTotal();
     }
 
-    editCart(event) {
+    static editCart(event) {
 
         var result = request('/api/cart', 'PUT', {
             "id": event.target.parentElement.parentElement.dataset.id,
             "amount": event.target.value
         });
 
-        this.calculateTotal();
+        CartController.calculateTotal();
     }
 
-    removeFromCart(event) {
+    static removeFromCart(event) {
 
         var result = request('/api/cart/' + event.target.parentElement.dataset.id, 'DELETE');
 
         event.target.parentElement.parentElement.removeChild(event.target.parentElement);
 
-        this.calculateTotal();
+        CartController.calculateTotal();
     }
 
-    calculateTotal() {
+    static calculateTotal() {
 
         var products = document.querySelectorAll(".ms-cart-list tr");
 
@@ -113,5 +98,39 @@ class CartController {
         });
 
         document.querySelector('.ms-cart .ms-total-price span').innerHTML = price.toFixed(2);
+
+        var checkoutButton = document.querySelector(".ms-checkout-button");
+        if(price > 0) {
+
+            checkoutButton.classList.add('ms-checkout-active');
+        } else {
+
+            checkoutButton.classList.remove('ms-checkout-active');
+        }
+    }
+
+    static addListeners() {
+
+        var amountField = document.querySelectorAll(".ms-cart-amount");
+
+        amountField.forEach(function(button) {
+
+            button.addEventListener("change", (event) => {
+
+                CartController.editCart(event);
+            });
+
+        });
+
+        var deleteButton = document.querySelectorAll(".ms-cart-delete");
+
+        deleteButton.forEach(function(button) {
+
+            button.addEventListener("click", (event) => {
+
+                CartController.removeFromCart(event);
+            });
+
+        });
     }
 }

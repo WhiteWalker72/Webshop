@@ -426,3 +426,13 @@ h1 {
     display: block;
     margin-bottom: 10px;
 }
+
+.ms-checkout-button {
+
+    display: none;
+}
+
+.ms-checkout-active {
+
+    display: inline-block;
+}
