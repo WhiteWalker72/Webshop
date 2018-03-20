@@ -4,12 +4,12 @@ public class Customer {
 
     private final int customerID;
     private final String name;
-    private final int adresID;
+    private final int addressID;
 
     public Customer(int customerID, String name, int adresID) {
         this.customerID = customerID;
         this.name = name;
-        this.adresID = adresID;
+        this.addressID = adresID;
     }
 
     public int getCustomerID() {
@@ -20,9 +20,7 @@ public class Customer {
         return name;
     }
 
-    public int getAdresID() {
-        return adresID;
+    public int getAddressID() {
+        return addressID;
     }
-
-
 }

@@ -39,7 +39,7 @@ public class PaymentServices {
     }
 
     public static void main(String[] args) {
-        System.out.println(PaymentServices.getInstance().getGiroNumber("customer", new AddressDTO(1, "street", 12
+        System.out.println(PaymentServices.getInstance().getGiroNumber("customer", new AddressDTO(1, "street", "12"
         , "1234ZP", "city", "country"), 12.00));
     }
 

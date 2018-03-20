@@ -51,12 +51,8 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link GetRandomNumber }{@code >}
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetRandomNumber }{@code >}}
      * 
-     * @param value
-     *     Java instance representing xml element's value.
-     * @return
-     *     the new instance of {@link JAXBElement }{@code <}{@link GetRandomNumber }{@code >}
      */
     @XmlElementDecl(namespace = "http://giro.jaxws/", name = "getRandomNumber")
     public JAXBElement<GetRandomNumber> createGetRandomNumber(GetRandomNumber value) {
@@ -64,12 +60,8 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link GetRandomNumberResponse }{@code >}
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetRandomNumberResponse }{@code >}}
      * 
-     * @param value
-     *     Java instance representing xml element's value.
-     * @return
-     *     the new instance of {@link JAXBElement }{@code <}{@link GetRandomNumberResponse }{@code >}
      */
     @XmlElementDecl(namespace = "http://giro.jaxws/", name = "getRandomNumberResponse")
     public JAXBElement<GetRandomNumberResponse> createGetRandomNumberResponse(GetRandomNumberResponse value) {
