@@ -1,0 +1,457 @@
+@font-face {
+    font-family: sourcesanspro;
+    src: url('source-sans-pro-regular.ttf');
+}
+
+@font-face {
+    font-family: sourcesanspro;
+    src: url('source-sans-pro-semibold.ttf');
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: sourcesanspro;
+    src: url('source-sans-pro-light.ttf');
+    font-weight: 100;
+}
+
+body {
+
+	font-family: sourcesanspro;
+    background: #F9F9F9;
+}
+
+a {
+
+	color: #000000;
+	text-decoration: none;
+}
+
+h1, h2 {
+
+    font-family: sourcesanspro;
+    font-size: 24pt;
+    margin: 10px 0px;
+    font-weight: 100;
+}
+
+h1 {
+
+    font-size: 34pt;
+}
+
+.ms-header {
+
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 50px;
+	background-color: #ffffff;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+	z-index: 5000;
+}
+.ms-header ul {
+
+	list-style: none;
+	margin: 0;
+	padding: 0;
+
+	max-width: 1000px;
+	margin: 0 auto;
+
+}
+
+.ms-header li {
+
+	display: inline-block;
+}
+
+.ms-header li a {
+	line-height: 50px;
+	height: 50px;
+	padding: 0px 20px;
+	display: inline-block;
+}
+
+.ms-header li.right {
+
+	float: right;
+}
+
+.ms-header li.left {
+
+    float: left;
+}
+
+.ms-header li a:hover, .ms-menu-active {
+
+	color: #3D8DCD;
+}
+
+.ms-header li a.ms-logo {
+
+    background: url('/images/logo.png');
+    background-size: contain;
+    display: block;
+    width: 50px;
+    line-height: 50px;
+    padding: 0;
+}
+
+.ms-link {
+
+    color: #636363;
+    display: block;
+}
+
+.ms-button {
+    display: inline-block;
+
+    line-height: 30px;
+
+    background-color: #3D8DCD;
+    padding: 0px 5px;
+    color: #ffffff;
+    cursor: pointer;
+
+    outline: none;
+    border: none;
+}
+
+.ms-button:hover{
+
+    background-color: #48a6f2;
+}
+
+/*			Categories dropdown menu			*/
+.ms-categories-container {
+
+	position: fixed;
+	top: 50px;
+	left: 0;
+	right: 0;
+	max-width: 1000px;
+	margin: 0 auto;
+	z-index: 9000;
+    display: none;
+}
+
+.ms-categories {
+
+    background-color: #ffffff;
+    width: 150px;
+    position: absolute;
+    left: 50px;
+    padding: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.ms-categories ul {
+
+	list-style: none;
+	width: 150px;
+	margin: 0;
+	padding: 0;
+}
+
+.ms-categories ul li a {
+
+	line-height: 20px;
+	height: 20px;
+	padding: 5px;
+	display: block;
+}
+
+.ms-categories ul li a:hover {
+    color: #48a6f2;
+}
+
+.ms-content {
+
+    max-width: 1000px;
+    margin: 75px auto 0 auto;
+}
+
+.ms-products {
+
+    width: 1020px;
+}
+
+.ms-product {
+    width: 190px;
+    padding: 12px 17px;
+    float: left;
+    background-color: #ffffff;
+    margin: 15px 30px 15px 0px;
+
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+
+    transition: .2s transform;
+}
+
+.ms-product:hover {
+
+    transform: scale(1.05);
+}
+
+.ms-product .ms-product-thumbnail {
+
+    max-width: 100%;
+    max-height: 150px;
+    display: block;
+    margin: 0 auto 5px auto;
+}
+
+.ms-product-title {
+
+    font-weight: bold;
+}
+
+.ms-product-description {
+
+}
+
+.ms-product-actions {
+
+    position: relative;
+    padding-top: 15px;
+}
+
+.ms-product-actions .ms-product-info {
+
+    float: left;
+}
+
+.ms-product-actions .ms-product-info > span {
+
+    display: block;
+}
+
+.ms-product-actions .ms-product-cart {
+
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}
+
+.ms-product-actions .ms-product-cart .ms-product-cart-amount {
+
+    width: 25px;
+    height: 26px;
+    border: 1px solid #3d8cce;
+
+    border-right: 0;
+
+    text-align: center;
+
+    position: relative;
+    top: -1px;
+    left: 4px;
+
+    outline: none;
+}
+
+.ms-product-actions .ms-product-cart .ms-product-cart-amount:hover,
+.ms-product-actions .ms-product-cart .ms-product-cart-amount:focus {
+
+    border-color: #48a6f2;
+}
+
+.ms-product .ms-product-actions .ms-product-cart .ms-product-cart-button {
+
+    margin-top: 5px;
+}
+
+.ms-old-price {
+    position: relative;
+    display: inline !important;
+    font-size: 13px;
+    color: #8b8b8b;
+}
+
+.ms-old-price:before {
+
+    position: absolute;
+    content: "";
+    left: 0;
+    top: 50%;
+    right: 0;
+    border-top: 1px solid;
+    border-color: inherit;
+
+    -webkit-transform:rotate(-5deg);
+    -moz-transform:rotate(-5deg);
+    -ms-transform:rotate(-5deg);
+    -o-transform:rotate(-5deg);
+    transform:rotate(-5deg);
+}
+
+.ms-clear {
+    clear: both;
+}
+/*			Cart dropdown menu			*/
+.ms-cart-container {
+
+    position: fixed;
+    top: 50px;
+    left: 0;
+    right: 0;
+    max-width: 1000px;
+    margin: 0 auto;
+    z-index: 9000;
+    display: none;
+}
+
+.ms-cart {
+
+    background-color: #ffffff;
+    width: 250px;
+    position: absolute;
+    right: 0;
+    padding: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+.ms-cart .ms-cart-list {
+
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.ms-cart .ms-cart-list td {
+
+    text-align: right;
+}
+
+.ms-cart .ms-cart-list td:first-child {
+
+    text-align: left;
+}
+
+.ms-cart .ms-cart-delete {
+
+    color: #c60000;
+    cursor: pointer;
+}
+
+.ms-cart .ms-cart-amount {
+
+    width: 20px;
+    border: none;
+    border-bottom: 1px solid #3d8cce;
+    text-align: center;
+
+    outline: none;
+}
+
+.ms-cart .ms-total-price {
+
+    display: block;
+    margin-bottom: 10px;
+}
+
+.ms-product-details-container {
+
+    padding: 12px 17px;
+
+    background-color: #ffffff;
+
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+
+    position: relative;
+
+}
+
+.ms-product-details-container .ms-product-details-image {
+
+    width: 39%;
+    float: left;
+}
+
+.ms-product-details-container .ms-product-details {
+
+    float: right;
+    width: 60%;
+}
+
+.ms-product-details-container .ms-product-title {
+
+    font-size: 20pt;
+}
+
+.ms-product-details-container .ms-product-description {
+
+    margin-top: 10px;
+}
+
+.ms-product-details-container .ms-product-actions {
+
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    left: calc(40% + 3px);
+}
+
+.ms-breadcrumb {
+
+    margin: 10px 0;
+    color: #636363;
+}
+
+.ms-breadcrumb a {
+
+    color: #636363;
+}
+
+.ms-breadcrumb a:hover {
+
+    color: #000000;
+}
+
+.ms-checkout-products-list {
+
+    width: 100%;
+}
+
+.ms-checkout-products-list td {
+
+    text-align: right;
+}
+
+.ms-checkout-products-list td:first-child {
+
+    text-align: left;
+}
+.ms-checkout-products-list .ms-cart-amount {
+
+    width: 20px;
+    text-align: center;
+
+    outline: none;
+}
+
+.ms-checkout-products-list .ms-total-price {
+
+    display: block;
+    margin-bottom: 10px;
+}
+
+.ms-checkout-button {
+
+    display: none;
+}
+
+.ms-checkout-active {
+
+    display: inline-block;
+}
+
+.ms-login input[type=text], .ms-login input[type=password] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
