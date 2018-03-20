@@ -1,7 +1,6 @@
 package persistence;
 
 import domain.account.Account;
-import domain.account.Address;
 import domain.account.Customer;
 import dto.*;
 import exceptions.ObjectAlreadyExistsException;
