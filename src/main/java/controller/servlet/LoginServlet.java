@@ -1,33 +1,39 @@
-/* package controller.servlet;
+package controller.servlet;
 
-import javax.servlet.*;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
-import persistence.Validate;
 
-@WebServlet(value = "/LoginServlet")
+import domain.account.Account;
+import exceptions.ObjectNotFoundException;
+import domain.account.PassHashingStrategyImpl;
+import persistence.PersistenceServices;
+
+// username pass
+@WebServlet(value = "/Login")
 public class LoginServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-
         String username = request.getParameter("username");
         String pass = request.getParameter("pass");
 
-        if (Validate.checkUser(username, pass)) {
-            RequestDispatcher rs = request.getRequestDispatcher("Welcome2");
-            rs.forward(request, response);
+        Account user = PersistenceServices.getInstance().getAccount(username);
+        if (user == null) {
+            request.getRequestDispatcher("/loginFailed.jsp").forward(request, response);
+            return;
+        }
+
+        String salt = user.getSalt();
+        String hashedPass = user.getPassword();
+        if (new PassHashingStrategyImpl().passwordEquals(pass, salt, hashedPass)) {
+            request.getRequestDispatcher("/loginSuccesful.jsp").forward(request, response);
         } else {
-            out.println("Gebruikersnaam of wachtwoord incorrect");
-            RequestDispatcher rs = request.getRequestDispatcher("index.jsp");
-            rs.include(request, response);
+            request.getRequestDispatcher("/loginFailed.jsp").forward(request, response);
         }
     }
-} */
+}

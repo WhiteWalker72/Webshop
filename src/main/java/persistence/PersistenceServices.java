@@ -17,7 +17,7 @@ public class PersistenceServices {
     private IDAOFactory daoFactory;
 
     private PersistenceServices() {
-        
+
     }
 
     public static PersistenceServices getInstance() {
@@ -138,5 +138,9 @@ public class PersistenceServices {
 
     public void insertAccount(Account account) throws ObjectAlreadyExistsException {
         daoFactory.getAccountDAO().insert(account);
+    }
+
+    public Account getAccount(String username) {
+        return daoFactory.getAccountDAO().findById(username);
     }
 }

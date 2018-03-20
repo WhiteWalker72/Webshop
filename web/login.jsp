@@ -75,7 +75,7 @@
 <body>
 <h1>Welkom terug</h1>
 
-<form method="post" action="controller.servlet.LoginServlet">
+<form method="post" action="/Login">
 
     <div class="container">
         <label for="username"><b>Gebruikersnaam</b></label>
