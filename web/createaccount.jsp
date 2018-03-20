@@ -98,6 +98,9 @@
         <label for="plaatsnaam"><b>Plaatsnaam</b></label>
         <input type="text" placeholder="Plaatsnaam" name="city" required>
 
+        <label for="land"><b>Land</b></label>
+        <input type="text" placeholder="Land" name="country" required>
+
         <label for="inlognaam"><b>Inlognaam</b></label>
         <input type="text" placeholder="Kies een inlognaam" name="username" required>
 

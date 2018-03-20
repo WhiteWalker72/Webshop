@@ -1,6 +1,8 @@
 package persistence;
 
 import domain.account.Account;
+import domain.account.Address;
+import domain.account.Customer;
 import dto.*;
 import exceptions.ObjectAlreadyExistsException;
 import exceptions.ObjectNotFoundException;
@@ -148,11 +150,23 @@ public class PersistenceServices {
         daoFactory.getAccountDAO().insert(account);
     }
 
+    public void insertCustomer(Customer customer) throws ObjectAlreadyExistsException {
+        daoFactory.getCustomerDAO().insert(customer);
+    }
+
     public String getNextAccountId() {
         return daoFactory.getAccountDAO().getNextUniqueId();
     }
 
     public Account getAccount(String username) {
         return daoFactory.getAccountDAO().findById(username);
+    }
+
+    public String getNextAddressId() {
+        return daoFactory.getAddressDAO().getNextUniqueId();
+    }
+
+    public String getNextCustomerId() {
+        return daoFactory.getCustomerDAO().getNextUniqueId();
     }
 }

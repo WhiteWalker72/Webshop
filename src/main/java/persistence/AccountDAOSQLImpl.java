@@ -34,6 +34,7 @@ public class AccountDAOSQLImpl extends DAOSQLImpl<Account> {
                     , resultSet.getInt("isactief")
                     , resultSet.getString("gebruikersnaam")
                     , resultSet.getString("wachtwoord")
+                    , resultSet.getInt("klant")
                     , resultSet.getString("salt")
             );
         } catch (SQLException e) {

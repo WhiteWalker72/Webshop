@@ -1,6 +1,7 @@
 package persistence;
 
 import domain.account.Account;
+import domain.account.Customer;
 import dto.*;
 
 public interface IDAOFactory {
@@ -18,5 +19,7 @@ public interface IDAOFactory {
     DAO<Account> getAccountDAO();
 
     DAO<OrderLineDTO> getOrderLineDAO();
+
+    DAO<Customer> getCustomerDAO();
 
 }
