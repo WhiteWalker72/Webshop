@@ -1,12 +1,12 @@
 package persistence;
 
 import domain.account.Customer;
-import dto.AddressDTO;
 import exceptions.ObjectAlreadyExistsException;
 import exceptions.ObjectNotFoundException;
 
-import java.sql.*;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Types;
 
 public class CustomerDAOSQLImpl extends DAOSQLImpl<Customer> {
 
@@ -19,7 +19,7 @@ public class CustomerDAOSQLImpl extends DAOSQLImpl<Customer> {
     @Override
     public String getNextUniqueId() {
         if (lastId == null) {
-            lastId = findAll().stream().mapToInt(Customer::getCustomerID).max().orElse(1) + 1;
+            lastId = findById("" + 1) == null ? 0 : findAll().stream().map(Customer::getCustomerID).reduce(Integer.MIN_VALUE, Integer::max);
         }
         lastId += 1;
         return lastId + "";

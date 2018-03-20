@@ -18,7 +18,7 @@ public class PersistenceServices {
     private IDAOFactory daoFactory;
 
     private PersistenceServices() {
-
+         
     }
 
     public static PersistenceServices getInstance() {
@@ -126,7 +126,7 @@ public class PersistenceServices {
     }
 
     public String getNextOrderId() {
-        return daoFactory.getOfferDAO().getNextUniqueId();
+        return daoFactory.getOrderDAO().getNextUniqueId();
     }
 
     public String getNextOrderLineId() {
@@ -184,4 +184,5 @@ public class PersistenceServices {
     public String getNextCustomerId() {
         return daoFactory.getCustomerDAO().getNextUniqueId();
     }
+
 }

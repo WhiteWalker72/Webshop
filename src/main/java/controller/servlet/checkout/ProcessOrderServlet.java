@@ -1,7 +1,5 @@
 package controller.servlet.checkout;
 
-import domain.cart.Cart;
-import domain.component.ComponentServices;
 import domain.payment.PaymentServices;
 import dto.AddressDTO;
 import dto.OrderDTO;
