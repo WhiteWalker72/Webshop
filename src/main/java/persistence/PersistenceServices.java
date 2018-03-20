@@ -148,6 +148,10 @@ public class PersistenceServices {
         daoFactory.getAccountDAO().insert(account);
     }
 
+    public String getNextAccountId() {
+        return daoFactory.getAccountDAO().getNextUniqueId();
+    }
+
     public Account getAccount(String username) {
         return daoFactory.getAccountDAO().findById(username);
     }
