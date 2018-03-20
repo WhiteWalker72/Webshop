@@ -22,7 +22,7 @@ public class OrderDAOSQLImpl extends DAOSQLImpl<OrderDTO> {
     @Override
     public String getNextUniqueId() {
         if (lastId == null) {
-            lastId = findAll().stream().mapToInt(OrderDTO::getId).max().orElse(1) + 1;
+            lastId = findById("" + 1) == null ? 0 : findAll().stream().map(OrderDTO::getId).reduce(Integer.MIN_VALUE, Integer::max);
         }
         lastId += 1;
         return lastId + "";

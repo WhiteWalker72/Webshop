@@ -18,7 +18,7 @@ public class OrderLineDAOSQLImpl extends DAOSQLImpl<OrderLineDTO> {
     @Override
     public String getNextUniqueId() {
         if (lastId == null) {
-            lastId = findAll().stream().mapToInt(OrderLineDTO::getId).max().orElse(1) + 1;
+            lastId = findById("" + 1) == null ? 0 : findAll().stream().map(OrderLineDTO::getId).reduce(Integer.MIN_VALUE, Integer::max);
         }
         lastId += 1;
         return lastId + "";
