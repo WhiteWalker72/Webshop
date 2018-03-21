@@ -8,37 +8,37 @@ import utils.Pair;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class PassHashingStrategyTest {
+public class PassHashingStrategyTest {
 
     private IPassHashingStrategy hashingStrategy;
 
     @BeforeEach
-    void init() {
+    public void init() {
         hashingStrategy = new PassHashingStrategyImpl();
     }
 
     @ParameterizedTest
     @ValueSource(strings = {"password", "Test1235", "hMsJWXlx5Yq8"})
-    void testPasswordNotEqualToHashed(String password) {
+    public void testPasswordNotEqualToHashed(String password) {
         assertNotEquals(hashingStrategy.hashPassword(password).getLeft(), password);
     }
 
     @ParameterizedTest
     @ValueSource(strings = {"password", "Test1235", "hMsJWXlx5Yq8"})
-    void testPassEquals(String password) {
+    public void testPassEquals(String password) {
         Pair<String, String> hashedPair = hashingStrategy.hashPassword(password);
         assertTrue(hashingStrategy.passwordEquals(password, hashedPair.getRight(), hashedPair.getLeft()));
     }
 
     @ParameterizedTest
     @ValueSource(strings = {"password", "Test1235", "hMsJWXlx5Yq8"})
-    void testPassNotEquals(String password) {
+    public void testPassNotEquals(String password) {
         Pair<String, String> hashedPair = hashingStrategy.hashPassword(password);
         assertFalse(hashingStrategy.passwordEquals(password + "1", hashedPair.getRight(), hashedPair.getLeft()));
     }
 
     @AfterEach
-    void tearDown() {
+    public void tearDown() {
         hashingStrategy = null;
     }
 

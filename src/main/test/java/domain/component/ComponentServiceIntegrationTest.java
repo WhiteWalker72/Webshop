@@ -18,19 +18,19 @@ public class ComponentServiceIntegrationTest {
     private static ComponentServices compServices;
 
     @BeforeAll
-    static void init() {
+    public static void init() {
         PersistenceServices.getInstance().switchToTestDatabase();
         compServices = ComponentServices.getInstance();
     }
 
     @Test
-    void componentsShouldNotExistTest() {
+    public void componentsShouldNotExistTest() {
         assertEquals(null, compServices.getCategory(1));
         assertEquals(null, compServices.getProduct(1));
     }
 
     @Test
-    void addRemoveProductToCategorySuccessTest() {
+    public void addRemoveProductToCategorySuccessTest() {
         addTestCategory();
         addTestProduct();
 
@@ -62,35 +62,35 @@ public class ComponentServiceIntegrationTest {
     }
 
     @Test
-    void addNullProductToCategoryFailsTest() {
+    public void addNullProductToCategoryFailsTest() {
         addTestCategory();
         assertThrows(ObjectNotFoundException.class, () -> compServices.addProductToCategory(null, compServices.getCategory(1)));
         deleteTestCategory();
     }
 
     @Test
-    void addProductToNullCategoryFailsTest() {
+    public void addProductToNullCategoryFailsTest() {
         addTestProduct();
         assertThrows(ObjectNotFoundException.class, () -> compServices.addProductToCategory(compServices.getProduct(1), null));
         deleteTestProduct();
     }
 
     @Test
-    void removeNullProductFromCategoryFailsTest() {
+    public void removeNullProductFromCategoryFailsTest() {
         addTestCategory();
         assertThrows(ObjectNotFoundException.class, () -> compServices.removeProductFromCategory(null, compServices.getCategory(1)));
         deleteTestCategory();
     }
 
     @Test
-    void removeProductFromNullCategoryFailsTest() {
+    public void removeProductFromNullCategoryFailsTest() {
         addTestProduct();
         assertThrows(ObjectNotFoundException.class, () -> compServices.removeProductFromCategory(compServices.getProduct(1), null));
         deleteTestProduct();
     }
 
     @Test
-    void componentsShouldBeDeletedTest() {
+    public void componentsShouldBeDeletedTest() {
         assertEquals(null, compServices.getCategory(1));
         assertEquals(null, compServices.getProduct(1));
     }
@@ -130,7 +130,7 @@ public class ComponentServiceIntegrationTest {
     }
 
     @AfterAll
-    static void tearDown() {
+    public static void tearDown() {
         compServices = null;
     }
 

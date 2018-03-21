@@ -15,23 +15,23 @@ public class AddressDAOTest {
     private static PersistenceServices perServices;
 
     @BeforeAll
-    static void init() {
+    public static void init() {
         PersistenceServices.getInstance().switchToTestDatabase();
         perServices = PersistenceServices.getInstance();
     }
 
     @AfterAll
-    static void tearDown() {
+    public static void tearDown() {
         perServices = null;
     }
 
     @Test
-    void addressShouldNotExistTest() {
+    public void addressShouldNotExistTest() {
         assertEquals(null, perServices.findAddressById(1 + ""));
     }
 
     @Test
-    void addAndDeleteAddressTest() {
+    public void addAndDeleteAddressTest() {
         // There should not be an address already
         assertEquals(null, perServices.findAddressById(1 + ""));
 
@@ -55,7 +55,7 @@ public class AddressDAOTest {
     }
 
     @Test
-    void insertAddressTwiceFailsTest() {
+    public void insertAddressTwiceFailsTest() {
         try {
             addTestAddress();
         } catch (ObjectAlreadyExistsException e) {
@@ -71,17 +71,17 @@ public class AddressDAOTest {
     }
 
     @Test
-    void deletingAddressFailsTest() {
+    public void deletingAddressFailsTest() {
         assertThrows(ObjectNotFoundException.class, () -> perServices.deleteAddress(1 + ""));
     }
 
     @Test
-    void updatingAddressFailsTest() {
+    public void updatingAddressFailsTest() {
         assertThrows(ObjectNotFoundException.class, () -> perServices.deleteAddress(1 + ""));
     }
 
     @Test
-    void updateAddressSuccessTest() {
+    public void updateAddressSuccessTest() {
         try {
             addTestAddress();
         } catch (ObjectAlreadyExistsException e) {

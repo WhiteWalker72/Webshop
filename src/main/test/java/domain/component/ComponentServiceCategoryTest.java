@@ -19,18 +19,18 @@ public class ComponentServiceCategoryTest {
     private static ComponentServices compServices;
 
     @BeforeAll
-    static void init() {
+    public static void init() {
         PersistenceServices.getInstance().switchToTestDatabase();
         compServices = ComponentServices.getInstance();
     }
 
     @Test
-    void categoryDoesNotExistTest() {
+    public void categoryDoesNotExistTest() {
         assertEquals(null, compServices.getCategory(1));
     }
 
     @Test
-    void addAndDeleteCategoryTest() {
+    public void addAndDeleteCategoryTest() {
         try {
             addTestCategory();
         } catch (ObjectAlreadyExistsException e) {
@@ -47,12 +47,12 @@ public class ComponentServiceCategoryTest {
     }
 
     @Test
-    void deletingCategoryFailsTest() {
+    public void deletingCategoryFailsTest() {
         assertThrows(ObjectNotFoundException.class, () ->  compServices.deleteCategory(compServices.getCategory(1)));
     }
 
     @Test
-    void addingCategoryTwiceFailsTest() {
+    public void addingCategoryTwiceFailsTest() {
         try {
             addTestCategory();
         } catch (ObjectAlreadyExistsException e) {
@@ -68,7 +68,7 @@ public class ComponentServiceCategoryTest {
     }
 
     @Test
-    void allCategoriesNotNullTest() {
+    public void allCategoriesNotNullTest() {
         assertNotEquals(null, compServices.getAllCategories());
     }
 
@@ -82,7 +82,7 @@ public class ComponentServiceCategoryTest {
     }
 
     @AfterAll
-    static void tearDown() {
+    public static void tearDown() {
         compServices = null;
     }
 

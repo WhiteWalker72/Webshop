@@ -16,18 +16,18 @@ public class ComponentServicesProductTest {
     private static ComponentServices compServices;
 
     @BeforeAll
-    static void init() {
+    public static void init() {
         PersistenceServices.getInstance().switchToTestDatabase();
         compServices = ComponentServices.getInstance();
     }
 
     @Test
-    void productDoesNotExistTest() {
+    public void productDoesNotExistTest() {
         assertEquals(null, compServices.getProduct(1));
     }
 
     @Test
-    void addAndDeleteProductTest() {
+    public void addAndDeleteProductTest() {
         try {
             addTestProduct();
         } catch (ObjectAlreadyExistsException e) {
@@ -44,7 +44,7 @@ public class ComponentServicesProductTest {
     }
 
     @Test
-    void productAmountLoweringTest() {
+    public void productAmountLoweringTest() {
         try {
             addTestProduct();
         } catch (ObjectAlreadyExistsException e) {
@@ -66,12 +66,12 @@ public class ComponentServicesProductTest {
     }
 
     @Test
-    void deletingProductFailsTest() {
+    public void deletingProductFailsTest() {
         assertThrows(ObjectNotFoundException.class, () ->  compServices.deleteProduct(compServices.getProduct(1)));
     }
 
     @Test
-    void addingProductTwiceFailsTest() {
+    public void addingProductTwiceFailsTest() {
         try {
             addTestProduct();
         } catch (ObjectAlreadyExistsException e) {
@@ -96,7 +96,7 @@ public class ComponentServicesProductTest {
     }
 
     @AfterAll
-    static void tearDown() {
+    public static void tearDown() {
         compServices = null;
     }
 

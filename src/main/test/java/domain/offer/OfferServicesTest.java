@@ -20,7 +20,7 @@ public class OfferServicesTest {
     private static OfferServices offerServices;
 
     @BeforeAll
-    static void init() {
+    public static void init() {
         PersistenceServices.getInstance().switchToTestDatabase();
         offerServices = OfferServices.getInstance();
 
@@ -34,12 +34,12 @@ public class OfferServicesTest {
     }
 
     @Test
-    void offersDoNotExistTest() {
+    public void offersDoNotExistTest() {
         assertTrue(offerServices.getActiveOffers().isEmpty());
     }
 
     @Test
-    void addAndDeleteOfferTest() {
+    public void addAndDeleteOfferTest() {
         assertTrue(offerServices.getAllOffers().isEmpty());
 
         try {
@@ -59,7 +59,7 @@ public class OfferServicesTest {
     }
 
     @Test
-    void addingOfferTwiceTest() {
+    public void addingOfferTwiceTest() {
         try {
             addTestOffer();
         } catch (ObjectAlreadyExistsException | InvalidDateException e) {
@@ -75,7 +75,7 @@ public class OfferServicesTest {
     }
 
     @Test
-    void offerIsActiveTest() {
+    public void offerIsActiveTest() {
         assertTrue(offerServices.getActiveOffers().isEmpty());
         try {
             addTestOffer();
@@ -93,7 +93,7 @@ public class OfferServicesTest {
     }
 
     @Test
-    void offerEndDateInPastTest() {
+    public void offerEndDateInPastTest() {
         Date startDate = new Date(System.currentTimeMillis() - 50);
         Date endDate = new Date(System.currentTimeMillis() - 1);
         assertThrows(InvalidDateException.class, () -> offerServices.addNewOffer(new OfferDTO(1, startDate, endDate, "Hele goedkope mand!", 8.99, 1)));
@@ -103,7 +103,7 @@ public class OfferServicesTest {
     }
 
     @Test
-    void offerStartDateBiggerThanEndTest() {
+    public void offerStartDateBiggerThanEndTest() {
         Date startDate = new Date(System.currentTimeMillis() + 101);
         Date endDate = new Date(System.currentTimeMillis() + 100);
         assertThrows(InvalidDateException.class, () -> offerServices.addNewOffer(new OfferDTO(1, startDate, endDate, "Hele goedkope mand!", 8.99, 1)));
@@ -123,7 +123,7 @@ public class OfferServicesTest {
     }
 
     @AfterAll
-    static void tearDown() {
+    public static void tearDown() {
         offerServices = null;
 
         try {
